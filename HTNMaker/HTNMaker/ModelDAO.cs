@@ -40,6 +40,9 @@ namespace HTNMaker
             {
                 dao = serializer.Deserialize(sr) as ModelDAO;
             }
+            // TODO check no two variable share a name, throw exception if so
+            // TODO check no actions share a name, throw exception if so
+            // TODO remove duplicates in top level actions
             return dao;
         }
     }

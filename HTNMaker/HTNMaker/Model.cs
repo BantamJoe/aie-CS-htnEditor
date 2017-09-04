@@ -47,9 +47,34 @@ namespace HTNMaker
             ModelDAO dao = ModelDAO.Load(filepath);
 
             // TODO create variables from DAO
+            foreach(VariableDTO varDTO in dao.Variables)
+            {
+                variables.Add(new Variable(varDTO));
+            }
             // TODO create actions from DAO, using named variables (possible exception: name not found)
+            foreach(ActionDTO actDTO in dao.Actions)
+            {
+                Action action = new Action(actDTO.Name, actDTO.Description, actDTO.IsPrimitive);
+                foreach(StatementDTO stateDTO in actDTO.Conditions)
+                {
+                    //TODO exception if not found
+                    Variable variable = variables.Find((Variable v) => { return v.Name == stateDTO.Variable; });
+                    action.addCondition(variable, stateDTO.Value);
+                }
+                foreach (StatementDTO stateDTO in actDTO.Effects)
+                {
+                    //TODO exception if not found
+                    Variable variable = variables.Find((Variable v) => { return v.Name == stateDTO.Variable; });
+                    action.addEffect(variable, stateDTO.Value);
+                }
+            }
             // TODO set action children based on names in DTO (possible exception: name not found)
-            // TODO set top level actions (possible exception: name not found)
-        }
+            foreach (ActionDTO actDTO in dao.Actions)
+            {
+                // TODO try to find child by name, exception if not found
+                // TODO try to add child, exception on relevant error code
+            }
+                // TODO set top level actions (possible exception: name not found)
+            }
     }
 }

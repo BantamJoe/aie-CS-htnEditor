@@ -27,6 +27,12 @@ namespace HTNMaker
             Description = description;
         }
 
+        public Variable(VariableDTO dto)
+        {
+            name = dto.Name;
+            Description = dto.Description;
+        }
+
         public VariableDTO CreateDTO()
         {
             VariableDTO dto = new VariableDTO();
