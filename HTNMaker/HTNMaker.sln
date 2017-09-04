@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HTNMaker", "HTNMaker\HTNMaker.csproj", "{CF648B8A-672B-42F4-8B8F-2A1A6A6F565C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CF648B8A-672B-42F4-8B8F-2A1A6A6F565C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF648B8A-672B-42F4-8B8F-2A1A6A6F565C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF648B8A-672B-42F4-8B8F-2A1A6A6F565C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF648B8A-672B-42F4-8B8F-2A1A6A6F565C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
