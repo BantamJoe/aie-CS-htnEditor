@@ -56,7 +56,7 @@ namespace HTNMaker
         }
 
         // Sets 
-        bool setPrimitive(bool primitive)
+        public bool setPrimitive(bool primitive)
         {
             if(children.Count == 0)
             {
@@ -70,7 +70,7 @@ namespace HTNMaker
 
         // TODO addChild: check if valid to add, not creating a loop, not already in children
         // TODO enumerate error codes?
-        int addChild(Action action)
+        public int addChild(Action action)
         {
             if (primitive)
             {
@@ -91,7 +91,7 @@ namespace HTNMaker
         }
         // TODO removeChild
         // TODO addCondition/effect, if already in list just change value
-        void addCondition(Variable variable, bool value)
+        public void addCondition(Variable variable, bool value)
         {
             int index = conditions.FindIndex((Statement s) => { return s.Variable == variable; });
             if(index == -1)
@@ -103,7 +103,7 @@ namespace HTNMaker
             }
         }
 
-        void addEffect(Variable variable, bool value)
+        public void addEffect(Variable variable, bool value)
         {
             int index = effects.FindIndex((Statement s) => { return s.Variable == variable; });
             if (index == -1)
@@ -119,7 +119,7 @@ namespace HTNMaker
         //TODO remove condition/effect
 
         //TODO createDTO
-        ActionDTO CreateDTO()
+        public ActionDTO CreateDTO()
         {
             ActionDTO dto = new ActionDTO();
             dto.Name = name;
@@ -141,7 +141,7 @@ namespace HTNMaker
             return dto;
         }
 
-        bool isDescendant(Action action)
+        public bool isDescendant(Action action)
         {
             if (children.Contains(action))
             {
