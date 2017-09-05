@@ -8,6 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+//TODO add checkboxes to make an action primitive/root, disabled if those are invalid choices
+//TODO figure out read-only databinding
+// TODO get grid to use variable names
+
 namespace HTNMaker
 {
     public partial class Form1 : Form
@@ -26,6 +30,15 @@ namespace HTNMaker
             model.Actions.Add(new Action("AttackWithWeapon", "Attack target with a weapon", true));
             model.Actions.Add(new Action("AttackMelee", "Attack target with fists", true));
             model.Actions.Add(new Action("Reload", "Reload Weapon", true));
+            model.Actions[0].addCondition(model.Variables[0], false);
+            model.Actions[1].addCondition(model.Variables[1], true);
+            model.Actions[1].addCondition(model.Variables[2], true);
+            model.Actions[3].addCondition(model.Variables[2], false);
+            model.Actions[3].addEffect(model.Variables[2], true);
+            model.Actions[0].addEffect(model.Variables[0], true);
+            model.Actions[0].addChild(model.Actions[1]);
+            model.Actions[0].addChild(model.Actions[2]);
+            model.Actions[0].addChild(model.Actions[3]);
 
             actionBindingSource.DataSource = model.Actions;
             variablesBindingSource.DataSource = model.Variables;
@@ -65,5 +78,22 @@ namespace HTNMaker
             }
         }
 
+        private void conditionsList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void statementBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void actionBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+            Action action = actionBindingSource.Current as Action;
+            conditionBindingSource.DataSource = action.Conditions;
+            effectBindingSource.DataSource = action.Effects;
+            childActionBindingSource.DataSource = action.Children;
+        }
     }
 }

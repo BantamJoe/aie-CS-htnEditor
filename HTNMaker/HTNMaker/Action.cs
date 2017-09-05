@@ -18,7 +18,7 @@ namespace HTNMaker
             }
         }
 
-        public string Description;
+        public string Description { get; set; }
 
         private bool primitive;
 
@@ -26,18 +26,25 @@ namespace HTNMaker
         {
             get { return primitive; }
         }
+        
 
         private List<Statement> conditions;
 
-        public IReadOnlyCollection<Statement> Conditions
-        {
-            get { return conditions.AsReadOnly(); }
+        //public IReadOnlyCollection<Statement> Conditions
+        //{
+        //    get { return conditions.AsReadOnly(); }
+        //    set { }
+        //}
+        public List<Statement> Conditions
+        { get { return conditions; }
+        set { conditions = value; }
         }
 
         private List<Statement> effects;
         public IReadOnlyCollection<Statement> Effects
         {
             get { return effects.AsReadOnly(); }
+            set { }
         }
 
         private List<Action> children;

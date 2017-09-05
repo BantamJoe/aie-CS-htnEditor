@@ -9,8 +9,9 @@ namespace HTNMaker
     public class Statement
     {
         // TODO write getter/setters, decide if read only, etc
-        public Variable Variable;
-        public bool Value;
+        public Variable Variable { get; set; }
+        public string VariableName { get { return Variable.Name; } }
+        public bool Value { get; set; }
 
         public Statement(Variable variable, bool value)
         {

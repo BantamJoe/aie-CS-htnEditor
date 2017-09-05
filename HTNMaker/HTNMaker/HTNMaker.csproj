@@ -77,6 +77,7 @@
     <None Include="Properties\DataSources\Action.datasource" />
     <None Include="Properties\DataSources\Form1.datasource" />
     <None Include="Properties\DataSources\Model.datasource" />
+    <None Include="Properties\DataSources\Statement.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

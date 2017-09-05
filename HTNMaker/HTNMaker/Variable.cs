@@ -19,7 +19,7 @@ namespace HTNMaker
             }
         }
 
-        public string Description;
+        public string Description { get; set; }
 
         public Variable(string name, string description = "")
         {
