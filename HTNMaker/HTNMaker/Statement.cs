@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HTNMaker
 {
-    class Statement
+    public class Statement
     {
         // TODO write getter/setters, decide if read only, etc
         public Variable Variable;

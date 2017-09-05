@@ -6,13 +6,46 @@ using System.Threading.Tasks;
 
 namespace HTNMaker
 {
-    class Model
+    public class Model
     {
         private List<Action> actions;
         private List<Variable> variables;
         private List<Action> topLevelActions;
 
         //TODO fields
+        public List<Action> Actions
+        {
+            get
+            {
+                return actions;
+            }
+            set
+            {
+                actions = value;
+            }
+        }
+        public List<Variable> Variables
+        {
+            get
+            {
+                return variables;
+            }
+            set
+            {
+                variables = value;
+            }
+        }
+        private List<Action> TopLevelActions
+        {
+            get
+            {
+                return topLevelActions;
+            }
+            set
+            {
+                topLevelActions = value;
+            }
+        }
 
         public Model()
         {

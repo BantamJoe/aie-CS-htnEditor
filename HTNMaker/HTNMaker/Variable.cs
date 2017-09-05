@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HTNMaker
 {
-    class Variable
+    public class Variable
     {
         private string name;
         public string Name

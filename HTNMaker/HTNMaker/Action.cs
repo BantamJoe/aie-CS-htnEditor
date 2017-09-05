@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HTNMaker
 {
-    class Action
+    public class Action
     {
         private string name;
         public string Name {
