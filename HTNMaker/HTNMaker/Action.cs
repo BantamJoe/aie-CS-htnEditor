@@ -25,8 +25,23 @@ namespace HTNMaker
         public bool IsPrimitive
         {
             get { return primitive; }
+            set
+            {
+                if (children.Count == 0)
+                {
+                    this.primitive = value;
+                } else
+                {
+                    this.primitive = false;
+                }
+            }
         }
         
+
+        public bool HasNoChildren
+        {
+            get { return children.Count == 0; }
+        }
 
         private List<Statement> conditions;
 
@@ -60,19 +75,6 @@ namespace HTNMaker
             conditions = new List<Statement>();
             effects = new List<Statement>();
             children = new List<Action>();
-        }
-
-        // Sets 
-        public bool setPrimitive(bool primitive)
-        {
-            if(children.Count == 0)
-            {
-                this.primitive = primitive;
-                return true;
-            } else
-            {
-                return false;
-            }
         }
 
         // TODO addChild: check if valid to add, not creating a loop, not already in children

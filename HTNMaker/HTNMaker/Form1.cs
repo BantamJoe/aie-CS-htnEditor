@@ -177,5 +177,17 @@ namespace HTNMaker
             return true;
         }
 
+        private void PrimitiveActionCB_Validating(object sender, CancelEventArgs e)
+        {
+            Action selectedAction = actionBindingSource.Current as Action;
+            // Cannot be checked if selected action has any children
+            if(!selectedAction.HasNoChildren && PrimitiveActionCB.Checked)
+            {
+                actionBindingSource.CancelEdit();
+                e.Cancel = true;
+                MessageBox.Show("Actions with children cannot be set as primitive", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+            }
+        }
     }
 }

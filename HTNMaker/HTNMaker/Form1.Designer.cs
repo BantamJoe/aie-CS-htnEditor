@@ -47,6 +47,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.editTabControl = new System.Windows.Forms.TabControl();
             this.ActionEditTab = new System.Windows.Forms.TabPage();
+            this.PrimitiveActionCB = new System.Windows.Forms.CheckBox();
             this.effectsGridView = new System.Windows.Forms.DataGridView();
             this.variableDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.valueDataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -69,6 +70,14 @@
             this.variableDescriptionLabel = new System.Windows.Forms.Label();
             this.variableNameTB = new System.Windows.Forms.TextBox();
             this.variableNameLabel = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.actionBindingSource)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -158,16 +167,18 @@
             this.elementTabControl.Location = new System.Drawing.Point(0, 59);
             this.elementTabControl.Name = "elementTabControl";
             this.elementTabControl.SelectedIndex = 0;
-            this.elementTabControl.Size = new System.Drawing.Size(200, 716);
+            this.elementTabControl.Size = new System.Drawing.Size(200, 849);
             this.elementTabControl.TabIndex = 4;
             // 
             // actionTab
             // 
+            this.actionTab.Controls.Add(this.button8);
+            this.actionTab.Controls.Add(this.button7);
             this.actionTab.Controls.Add(this.actionListBox);
             this.actionTab.Location = new System.Drawing.Point(4, 22);
             this.actionTab.Name = "actionTab";
             this.actionTab.Padding = new System.Windows.Forms.Padding(3);
-            this.actionTab.Size = new System.Drawing.Size(192, 690);
+            this.actionTab.Size = new System.Drawing.Size(192, 823);
             this.actionTab.TabIndex = 0;
             this.actionTab.Text = "Actions";
             this.actionTab.UseVisualStyleBackColor = true;
@@ -190,7 +201,7 @@
             this.variablesTab.Location = new System.Drawing.Point(4, 22);
             this.variablesTab.Name = "variablesTab";
             this.variablesTab.Padding = new System.Windows.Forms.Padding(3);
-            this.variablesTab.Size = new System.Drawing.Size(192, 690);
+            this.variablesTab.Size = new System.Drawing.Size(192, 823);
             this.variablesTab.TabIndex = 1;
             this.variablesTab.Text = "Variables";
             this.variablesTab.UseVisualStyleBackColor = true;
@@ -216,9 +227,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
-            this.panel1.Location = new System.Drawing.Point(206, 81);
+            this.panel1.Location = new System.Drawing.Point(202, 81);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(588, 694);
+            this.panel1.Size = new System.Drawing.Size(572, 827);
             this.panel1.TabIndex = 5;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -228,15 +239,22 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.editTabControl.Controls.Add(this.ActionEditTab);
             this.editTabControl.Controls.Add(this.variableEditTab);
-            this.editTabControl.Location = new System.Drawing.Point(801, 59);
+            this.editTabControl.Location = new System.Drawing.Point(776, 59);
             this.editTabControl.Name = "editTabControl";
             this.editTabControl.SelectedIndex = 0;
-            this.editTabControl.Size = new System.Drawing.Size(283, 716);
+            this.editTabControl.Size = new System.Drawing.Size(308, 849);
             this.editTabControl.TabIndex = 6;
             // 
             // ActionEditTab
             // 
             this.ActionEditTab.AutoScroll = true;
+            this.ActionEditTab.Controls.Add(this.button6);
+            this.ActionEditTab.Controls.Add(this.button5);
+            this.ActionEditTab.Controls.Add(this.button4);
+            this.ActionEditTab.Controls.Add(this.button3);
+            this.ActionEditTab.Controls.Add(this.button2);
+            this.ActionEditTab.Controls.Add(this.button1);
+            this.ActionEditTab.Controls.Add(this.PrimitiveActionCB);
             this.ActionEditTab.Controls.Add(this.effectsGridView);
             this.ActionEditTab.Controls.Add(this.conditionsGridView);
             this.ActionEditTab.Controls.Add(this.label4);
@@ -250,22 +268,38 @@
             this.ActionEditTab.Location = new System.Drawing.Point(4, 22);
             this.ActionEditTab.Name = "ActionEditTab";
             this.ActionEditTab.Padding = new System.Windows.Forms.Padding(3);
-            this.ActionEditTab.Size = new System.Drawing.Size(275, 690);
+            this.ActionEditTab.Size = new System.Drawing.Size(300, 823);
             this.ActionEditTab.TabIndex = 0;
             this.ActionEditTab.Text = "Actions";
             this.ActionEditTab.UseVisualStyleBackColor = true;
             // 
+            // PrimitiveActionCB
+            // 
+            this.PrimitiveActionCB.AutoSize = true;
+            this.PrimitiveActionCB.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.PrimitiveActionCB.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.actionBindingSource, "IsPrimitive", true));
+            this.PrimitiveActionCB.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", this.actionBindingSource, "HasNoChildren", true));
+            this.PrimitiveActionCB.Location = new System.Drawing.Point(30, 143);
+            this.PrimitiveActionCB.Name = "PrimitiveActionCB";
+            this.PrimitiveActionCB.Size = new System.Drawing.Size(98, 17);
+            this.PrimitiveActionCB.TabIndex = 24;
+            this.PrimitiveActionCB.Text = "Primitive Action";
+            this.PrimitiveActionCB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.PrimitiveActionCB.UseVisualStyleBackColor = true;
+            this.PrimitiveActionCB.Validating += new System.ComponentModel.CancelEventHandler(this.PrimitiveActionCB_Validating);
+            // 
             // effectsGridView
             // 
             this.effectsGridView.AutoGenerateColumns = false;
+            this.effectsGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.effectsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.effectsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.variableDataGridViewTextBoxColumn1,
             this.valueDataGridViewCheckBoxColumn1});
             this.effectsGridView.DataSource = this.effectBindingSource;
-            this.effectsGridView.Location = new System.Drawing.Point(112, 342);
+            this.effectsGridView.Location = new System.Drawing.Point(112, 384);
             this.effectsGridView.Name = "effectsGridView";
-            this.effectsGridView.Size = new System.Drawing.Size(139, 111);
+            this.effectsGridView.Size = new System.Drawing.Size(173, 111);
             this.effectsGridView.TabIndex = 21;
             // 
             // variableDataGridViewTextBoxColumn1
@@ -274,12 +308,14 @@
             this.variableDataGridViewTextBoxColumn1.HeaderText = "Variable";
             this.variableDataGridViewTextBoxColumn1.Name = "variableDataGridViewTextBoxColumn1";
             this.variableDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.variableDataGridViewTextBoxColumn1.Width = 70;
             // 
             // valueDataGridViewCheckBoxColumn1
             // 
             this.valueDataGridViewCheckBoxColumn1.DataPropertyName = "Value";
             this.valueDataGridViewCheckBoxColumn1.HeaderText = "Value";
             this.valueDataGridViewCheckBoxColumn1.Name = "valueDataGridViewCheckBoxColumn1";
+            this.valueDataGridViewCheckBoxColumn1.Width = 40;
             // 
             // effectBindingSource
             // 
@@ -288,14 +324,15 @@
             // conditionsGridView
             // 
             this.conditionsGridView.AutoGenerateColumns = false;
+            this.conditionsGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.conditionsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.conditionsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.variableDataGridViewTextBoxColumn,
             this.valueDataGridViewCheckBoxColumn});
             this.conditionsGridView.DataSource = this.conditionBindingSource;
-            this.conditionsGridView.Location = new System.Drawing.Point(112, 163);
+            this.conditionsGridView.Location = new System.Drawing.Point(112, 205);
             this.conditionsGridView.Name = "conditionsGridView";
-            this.conditionsGridView.Size = new System.Drawing.Size(139, 113);
+            this.conditionsGridView.Size = new System.Drawing.Size(173, 113);
             this.conditionsGridView.TabIndex = 20;
             this.conditionsGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.conditionsGridView_CellContentClick);
             // 
@@ -305,12 +342,14 @@
             this.variableDataGridViewTextBoxColumn.HeaderText = "Variable";
             this.variableDataGridViewTextBoxColumn.Name = "variableDataGridViewTextBoxColumn";
             this.variableDataGridViewTextBoxColumn.ReadOnly = true;
+            this.variableDataGridViewTextBoxColumn.Width = 70;
             // 
             // valueDataGridViewCheckBoxColumn
             // 
             this.valueDataGridViewCheckBoxColumn.DataPropertyName = "Value";
             this.valueDataGridViewCheckBoxColumn.HeaderText = "Value";
             this.valueDataGridViewCheckBoxColumn.Name = "valueDataGridViewCheckBoxColumn";
+            this.valueDataGridViewCheckBoxColumn.Width = 40;
             // 
             // conditionBindingSource
             // 
@@ -321,7 +360,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(46, 540);
+            this.label4.Location = new System.Drawing.Point(46, 582);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(68, 13);
             this.label4.TabIndex = 19;
@@ -332,7 +371,7 @@
             this.childList.DataSource = this.childActionBindingSource;
             this.childList.DisplayMember = "Name";
             this.childList.FormattingEnabled = true;
-            this.childList.Location = new System.Drawing.Point(120, 540);
+            this.childList.Location = new System.Drawing.Point(120, 582);
             this.childList.Name = "childList";
             this.childList.Size = new System.Drawing.Size(120, 95);
             this.childList.TabIndex = 18;
@@ -344,7 +383,7 @@
             // effectsLabel
             // 
             this.effectsLabel.AutoSize = true;
-            this.effectsLabel.Location = new System.Drawing.Point(64, 342);
+            this.effectsLabel.Location = new System.Drawing.Point(64, 384);
             this.effectsLabel.Name = "effectsLabel";
             this.effectsLabel.Size = new System.Drawing.Size(40, 13);
             this.effectsLabel.TabIndex = 17;
@@ -353,7 +392,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(33, 163);
+            this.label3.Location = new System.Drawing.Point(33, 205);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 13);
             this.label3.TabIndex = 15;
@@ -362,7 +401,7 @@
             // selectedDescriptionTB
             // 
             this.selectedDescriptionTB.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.actionBindingSource, "Description", true));
-            this.selectedDescriptionTB.Location = new System.Drawing.Point(112, 42);
+            this.selectedDescriptionTB.Location = new System.Drawing.Point(112, 60);
             this.selectedDescriptionTB.Multiline = true;
             this.selectedDescriptionTB.Name = "selectedDescriptionTB";
             this.selectedDescriptionTB.Size = new System.Drawing.Size(129, 59);
@@ -371,7 +410,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(44, 42);
+            this.label2.Location = new System.Drawing.Point(44, 60);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 13);
             this.label2.TabIndex = 12;
@@ -380,7 +419,7 @@
             // selectedNameTB
             // 
             this.selectedNameTB.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.actionBindingSource, "Name", true));
-            this.selectedNameTB.Location = new System.Drawing.Point(112, 7);
+            this.selectedNameTB.Location = new System.Drawing.Point(112, 25);
             this.selectedNameTB.Name = "selectedNameTB";
             this.selectedNameTB.Size = new System.Drawing.Size(129, 20);
             this.selectedNameTB.TabIndex = 11;
@@ -389,7 +428,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(69, 7);
+            this.label1.Location = new System.Drawing.Point(69, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 10;
@@ -405,7 +444,7 @@
             this.variableEditTab.Location = new System.Drawing.Point(4, 22);
             this.variableEditTab.Name = "variableEditTab";
             this.variableEditTab.Padding = new System.Windows.Forms.Padding(3);
-            this.variableEditTab.Size = new System.Drawing.Size(275, 690);
+            this.variableEditTab.Size = new System.Drawing.Size(322, 823);
             this.variableEditTab.TabIndex = 1;
             this.variableEditTab.Text = "Variables";
             this.variableEditTab.UseVisualStyleBackColor = true;
@@ -446,11 +485,83 @@
             this.variableNameLabel.TabIndex = 0;
             this.variableNameLabel.Text = "Name";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(114, 345);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 25;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(195, 345);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 26;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(112, 519);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 27;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(195, 519);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 28;
+            this.button4.Text = "button4";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(120, 700);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 29;
+            this.button5.Text = "button5";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(201, 700);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 30;
+            this.button6.Text = "button6";
+            this.button6.UseVisualStyleBackColor = true;
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(17, 320);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(75, 23);
+            this.button7.TabIndex = 1;
+            this.button7.Text = "button7";
+            this.button7.UseVisualStyleBackColor = true;
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(98, 320);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(75, 23);
+            this.button8.TabIndex = 2;
+            this.button8.Text = "button8";
+            this.button8.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1084, 777);
+            this.ClientSize = new System.Drawing.Size(1084, 910);
             this.Controls.Add(this.editTabControl);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.elementTabControl);
@@ -524,6 +635,15 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn valueDataGridViewCheckBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn variableDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn valueDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.CheckBox PrimitiveActionCB;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
     }
 }
 
