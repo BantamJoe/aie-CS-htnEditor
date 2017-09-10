@@ -8,30 +8,26 @@ namespace HTNMaker
 {
     public class Variable
     {
-        private Model model;
         private string name;
         public string Name
         {
             get { return name; }
             set
             {
-                // TODO somewhere, check name is unique
-                name = Name;
+                name = value;
             }
         }
 
         public string Description { get; set; }
 
-        public Variable(Model model, string name, string description = "")
+        public Variable(string name, string description = "")
         {
-            this.model = model;
             this.name = name;
             Description = description;
         }
 
-        public Variable(Model model, VariableDTO dto)
+        public Variable(VariableDTO dto)
         {
-            this.model = model;
             name = dto.Name;
             Description = dto.Description;
         }

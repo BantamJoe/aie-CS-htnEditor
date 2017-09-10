@@ -23,13 +23,13 @@ namespace HTNMaker
 
             model = new Model();
             //HACK for checking things are shown correctly
-            model.Variables.Add(new Variable(model, "TargetIsDead", "The agent's target has been killed"));
-            model.Variables.Add(new Variable(model, "WeaponArmed", "The agent is holding their weapon"));
-            model.Variables.Add(new Variable(model, "WeaponLoaded", "The agent's weapon is loaded"));
-            model.Actions.Add(new Action(model, "Attack", "Attack Target"));
-            model.Actions.Add(new Action(model, "AttackWithWeapon", "Attack target with a weapon", true));
-            model.Actions.Add(new Action(model, "AttackMelee", "Attack target with fists", true));
-            model.Actions.Add(new Action(model, "Reload", "Reload Weapon", true));
+            model.Variables.Add(new Variable("TargetIsDead", "The agent's target has been killed"));
+            model.Variables.Add(new Variable("WeaponArmed", "The agent is holding their weapon"));
+            model.Variables.Add(new Variable("WeaponLoaded", "The agent's weapon is loaded"));
+            model.Actions.Add(new Action("Attack", "Attack Target"));
+            model.Actions.Add(new Action("AttackWithWeapon", "Attack target with a weapon", true));
+            model.Actions.Add(new Action("AttackMelee", "Attack target with fists", true));
+            model.Actions.Add(new Action("Reload", "Reload Weapon", true));
             model.Actions[0].addCondition(model.Variables[0], false);
             model.Actions[1].addCondition(model.Variables[1], true);
             model.Actions[1].addCondition(model.Variables[2], true);
@@ -100,5 +100,82 @@ namespace HTNMaker
         {
 
         }
+
+        private void selectedNameTB_Validating(object sender, CancelEventArgs e)
+        {
+            Action selectedAction = actionBindingSource.Current as Action;
+            string errorMsg;
+            if(!IsValidActionName(selectedNameTB.Text, selectedAction, out errorMsg))
+            {
+                actionBindingSource.CancelEdit();
+                e.Cancel = true;
+                selectedNameTB.SelectAll();
+                MessageBox.Show(errorMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+        }
+
+        private void variableNameTB_Validating(object sender, CancelEventArgs e)
+        {
+            Variable selectedVariable = variablesBindingSource.Current as Variable;
+            string errorMsg;
+            if(!IsValidVariableName(variableNameTB.Text, selectedVariable, out errorMsg))
+            {
+                variablesBindingSource.CancelEdit();
+                e.Cancel = true;
+                variableNameTB.SelectAll();
+                MessageBox.Show(errorMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+
+        public bool IsValidActionName(string name, Action renamedAction, out string errorMsg)
+        {
+            //TODO validate action name (length, legal characters, whitespace)
+            if (!IsUniqueActionName(name, renamedAction))
+            {
+                errorMsg = "Action must have unique name";
+                return false;
+            }
+            errorMsg = "";
+            return true;
+        }
+
+        public bool IsUniqueActionName(string name, Action renamedAction)
+        {
+            foreach(Action action in model.Actions)
+            {
+                if(action != renamedAction && action.Name == name)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public bool IsValidVariableName(string name, Variable renamedVariable, out string errorMsg)
+        {
+            //TODO other validation (length, legal characters, whitespace)
+            if(!IsUniqueVariableName(name, renamedVariable))
+            {
+                errorMsg = "Variable must have unique name";
+                return false;
+            }
+            errorMsg = "";
+            return true;
+            
+        }
+
+        public bool IsUniqueVariableName(string name, Variable renamedVariable)
+        {
+            foreach(Variable variable in model.Variables)
+            {
+                if(variable != renamedVariable && variable.Name == name)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
     }
 }

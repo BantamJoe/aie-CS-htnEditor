@@ -384,6 +384,7 @@
             this.selectedNameTB.Name = "selectedNameTB";
             this.selectedNameTB.Size = new System.Drawing.Size(129, 20);
             this.selectedNameTB.TabIndex = 11;
+            this.selectedNameTB.Validating += new System.ComponentModel.CancelEventHandler(this.selectedNameTB_Validating);
             // 
             // label1
             // 
@@ -434,6 +435,7 @@
             this.variableNameTB.Name = "variableNameTB";
             this.variableNameTB.Size = new System.Drawing.Size(154, 20);
             this.variableNameTB.TabIndex = 1;
+            this.variableNameTB.Validating += new System.ComponentModel.CancelEventHandler(this.variableNameTB_Validating);
             // 
             // variableNameLabel
             // 

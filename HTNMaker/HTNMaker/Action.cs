@@ -8,15 +8,13 @@ namespace HTNMaker
 {
     public class Action
     {
-        private Model model;
 
         private string name;
         public string Name {
             get { return name; }
             set
             {
-                // TODO somewhere, check name is unique
-                name = Name;
+                name = value;
             }
         }
 
@@ -55,9 +53,8 @@ namespace HTNMaker
             get { return children.AsReadOnly(); }
         }
 
-        public Action(Model model, string name, string description = "", bool primitive = false)
+        public Action(string name, string description = "", bool primitive = false)
         {
-            this.model = model;
             this.name = name;
             this.Description = description;
             conditions = new List<Statement>();
