@@ -48,8 +48,12 @@
             this.editTabControl = new System.Windows.Forms.TabControl();
             this.ActionEditTab = new System.Windows.Forms.TabPage();
             this.effectsGridView = new System.Windows.Forms.DataGridView();
+            this.variableDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.valueDataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.effectBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.conditionsGridView = new System.Windows.Forms.DataGridView();
+            this.variableDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.valueDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.conditionBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label4 = new System.Windows.Forms.Label();
             this.childList = new System.Windows.Forms.ListBox();
@@ -65,10 +69,6 @@
             this.variableDescriptionLabel = new System.Windows.Forms.Label();
             this.variableNameTB = new System.Windows.Forms.TextBox();
             this.variableNameLabel = new System.Windows.Forms.Label();
-            this.variableDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.valueDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.variableDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.valueDataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.actionBindingSource)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -216,9 +216,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
-            this.panel1.Location = new System.Drawing.Point(206, 59);
+            this.panel1.Location = new System.Drawing.Point(206, 81);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(588, 716);
+            this.panel1.Size = new System.Drawing.Size(588, 694);
             this.panel1.TabIndex = 5;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -265,9 +265,21 @@
             this.effectsGridView.DataSource = this.effectBindingSource;
             this.effectsGridView.Location = new System.Drawing.Point(112, 342);
             this.effectsGridView.Name = "effectsGridView";
-            this.effectsGridView.ReadOnly = true;
             this.effectsGridView.Size = new System.Drawing.Size(139, 111);
             this.effectsGridView.TabIndex = 21;
+            // 
+            // variableDataGridViewTextBoxColumn1
+            // 
+            this.variableDataGridViewTextBoxColumn1.DataPropertyName = "VariableName";
+            this.variableDataGridViewTextBoxColumn1.HeaderText = "Variable";
+            this.variableDataGridViewTextBoxColumn1.Name = "variableDataGridViewTextBoxColumn1";
+            this.variableDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // valueDataGridViewCheckBoxColumn1
+            // 
+            this.valueDataGridViewCheckBoxColumn1.DataPropertyName = "Value";
+            this.valueDataGridViewCheckBoxColumn1.HeaderText = "Value";
+            this.valueDataGridViewCheckBoxColumn1.Name = "valueDataGridViewCheckBoxColumn1";
             // 
             // effectBindingSource
             // 
@@ -283,9 +295,22 @@
             this.conditionsGridView.DataSource = this.conditionBindingSource;
             this.conditionsGridView.Location = new System.Drawing.Point(112, 163);
             this.conditionsGridView.Name = "conditionsGridView";
-            this.conditionsGridView.ReadOnly = true;
             this.conditionsGridView.Size = new System.Drawing.Size(139, 113);
             this.conditionsGridView.TabIndex = 20;
+            this.conditionsGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.conditionsGridView_CellContentClick);
+            // 
+            // variableDataGridViewTextBoxColumn
+            // 
+            this.variableDataGridViewTextBoxColumn.DataPropertyName = "VariableName";
+            this.variableDataGridViewTextBoxColumn.HeaderText = "Variable";
+            this.variableDataGridViewTextBoxColumn.Name = "variableDataGridViewTextBoxColumn";
+            this.variableDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // valueDataGridViewCheckBoxColumn
+            // 
+            this.valueDataGridViewCheckBoxColumn.DataPropertyName = "Value";
+            this.valueDataGridViewCheckBoxColumn.HeaderText = "Value";
+            this.valueDataGridViewCheckBoxColumn.Name = "valueDataGridViewCheckBoxColumn";
             // 
             // conditionBindingSource
             // 
@@ -418,34 +443,6 @@
             this.variableNameLabel.Size = new System.Drawing.Size(35, 13);
             this.variableNameLabel.TabIndex = 0;
             this.variableNameLabel.Text = "Name";
-            // 
-            // variableDataGridViewTextBoxColumn
-            // 
-            this.variableDataGridViewTextBoxColumn.DataPropertyName = "Variable";
-            this.variableDataGridViewTextBoxColumn.HeaderText = "Variable";
-            this.variableDataGridViewTextBoxColumn.Name = "variableDataGridViewTextBoxColumn";
-            this.variableDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // valueDataGridViewCheckBoxColumn
-            // 
-            this.valueDataGridViewCheckBoxColumn.DataPropertyName = "Value";
-            this.valueDataGridViewCheckBoxColumn.HeaderText = "Value";
-            this.valueDataGridViewCheckBoxColumn.Name = "valueDataGridViewCheckBoxColumn";
-            this.valueDataGridViewCheckBoxColumn.ReadOnly = true;
-            // 
-            // variableDataGridViewTextBoxColumn1
-            // 
-            this.variableDataGridViewTextBoxColumn1.DataPropertyName = "Variable";
-            this.variableDataGridViewTextBoxColumn1.HeaderText = "Variable";
-            this.variableDataGridViewTextBoxColumn1.Name = "variableDataGridViewTextBoxColumn1";
-            this.variableDataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // valueDataGridViewCheckBoxColumn1
-            // 
-            this.valueDataGridViewCheckBoxColumn1.DataPropertyName = "Value";
-            this.valueDataGridViewCheckBoxColumn1.HeaderText = "Value";
-            this.valueDataGridViewCheckBoxColumn1.Name = "valueDataGridViewCheckBoxColumn1";
-            this.valueDataGridViewCheckBoxColumn1.ReadOnly = true;
             // 
             // Form1
             // 

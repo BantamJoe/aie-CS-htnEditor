@@ -8,6 +8,8 @@ namespace HTNMaker
 {
     public class Action
     {
+        private Model model;
+
         private string name;
         public string Name {
             get { return name; }
@@ -41,10 +43,10 @@ namespace HTNMaker
         }
 
         private List<Statement> effects;
-        public IReadOnlyCollection<Statement> Effects
+        public List<Statement> Effects
         {
-            get { return effects.AsReadOnly(); }
-            set { }
+            get { return effects; }
+            set { effects = value; }
         }
 
         private List<Action> children;
@@ -53,8 +55,9 @@ namespace HTNMaker
             get { return children.AsReadOnly(); }
         }
 
-        public Action(string name, string description = "", bool primitive = false)
+        public Action(Model model, string name, string description = "", bool primitive = false)
         {
+            this.model = model;
             this.name = name;
             this.Description = description;
             conditions = new List<Statement>();

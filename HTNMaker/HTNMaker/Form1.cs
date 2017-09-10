@@ -23,13 +23,13 @@ namespace HTNMaker
 
             model = new Model();
             //HACK for checking things are shown correctly
-            model.Variables.Add(new Variable("TargetIsDead", "The agent's target has been killed"));
-            model.Variables.Add(new Variable("WeaponArmed", "The agent is holding their weapon"));
-            model.Variables.Add(new Variable("WeaponLoaded", "The agent's weapon is loaded"));
-            model.Actions.Add(new Action("Attack", "Attack Target"));
-            model.Actions.Add(new Action("AttackWithWeapon", "Attack target with a weapon", true));
-            model.Actions.Add(new Action("AttackMelee", "Attack target with fists", true));
-            model.Actions.Add(new Action("Reload", "Reload Weapon", true));
+            model.Variables.Add(new Variable(model, "TargetIsDead", "The agent's target has been killed"));
+            model.Variables.Add(new Variable(model, "WeaponArmed", "The agent is holding their weapon"));
+            model.Variables.Add(new Variable(model, "WeaponLoaded", "The agent's weapon is loaded"));
+            model.Actions.Add(new Action(model, "Attack", "Attack Target"));
+            model.Actions.Add(new Action(model, "AttackWithWeapon", "Attack target with a weapon", true));
+            model.Actions.Add(new Action(model, "AttackMelee", "Attack target with fists", true));
+            model.Actions.Add(new Action(model, "Reload", "Reload Weapon", true));
             model.Actions[0].addCondition(model.Variables[0], false);
             model.Actions[1].addCondition(model.Variables[1], true);
             model.Actions[1].addCondition(model.Variables[2], true);
@@ -94,6 +94,11 @@ namespace HTNMaker
             conditionBindingSource.DataSource = action.Conditions;
             effectBindingSource.DataSource = action.Effects;
             childActionBindingSource.DataSource = action.Children;
+        }
+
+        private void conditionsGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

@@ -8,6 +8,7 @@ namespace HTNMaker
 {
     public class Variable
     {
+        private Model model;
         private string name;
         public string Name
         {
@@ -21,14 +22,16 @@ namespace HTNMaker
 
         public string Description { get; set; }
 
-        public Variable(string name, string description = "")
+        public Variable(Model model, string name, string description = "")
         {
+            this.model = model;
             this.name = name;
             Description = description;
         }
 
-        public Variable(VariableDTO dto)
+        public Variable(Model model, VariableDTO dto)
         {
+            this.model = model;
             name = dto.Name;
             Description = dto.Description;
         }

@@ -82,12 +82,12 @@ namespace HTNMaker
             // TODO create variables from DAO
             foreach(VariableDTO varDTO in dao.Variables)
             {
-                variables.Add(new Variable(varDTO));
+                variables.Add(new Variable(this, varDTO));
             }
             // TODO create actions from DAO, using named variables (possible exception: name not found)
             foreach(ActionDTO actDTO in dao.Actions)
             {
-                Action action = new Action(actDTO.Name, actDTO.Description, actDTO.IsPrimitive);
+                Action action = new Action(this, actDTO.Name, actDTO.Description, actDTO.IsPrimitive);
                 foreach(StatementDTO stateDTO in actDTO.Conditions)
                 {
                     //TODO exception if not found
