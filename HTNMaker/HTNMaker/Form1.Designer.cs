@@ -1,6 +1,6 @@
 ﻿namespace HTNMaker
 {
-    partial class Form1
+    partial class HTNEditorForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HTNEditorForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,8 +51,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.editTabControl = new System.Windows.Forms.TabControl();
             this.ActionEditTab = new System.Windows.Forms.TabPage();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.RemoveChildButton = new System.Windows.Forms.Button();
+            this.AddChildButton = new System.Windows.Forms.Button();
             this.RemoveEffectButton = new System.Windows.Forms.Button();
             this.AddEffectButton = new System.Windows.Forms.Button();
             this.RemoveConditionButton = new System.Windows.Forms.Button();
@@ -292,8 +292,8 @@
             // ActionEditTab
             // 
             this.ActionEditTab.AutoScroll = true;
-            this.ActionEditTab.Controls.Add(this.button6);
-            this.ActionEditTab.Controls.Add(this.button5);
+            this.ActionEditTab.Controls.Add(this.RemoveChildButton);
+            this.ActionEditTab.Controls.Add(this.AddChildButton);
             this.ActionEditTab.Controls.Add(this.RemoveEffectButton);
             this.ActionEditTab.Controls.Add(this.AddEffectButton);
             this.ActionEditTab.Controls.Add(this.RemoveConditionButton);
@@ -317,23 +317,24 @@
             this.ActionEditTab.Text = "Actions";
             this.ActionEditTab.UseVisualStyleBackColor = true;
             // 
-            // button6
+            // RemoveChildButton
             // 
-            this.button6.Location = new System.Drawing.Point(201, 700);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 38);
-            this.button6.TabIndex = 30;
-            this.button6.Text = "Remove Child";
-            this.button6.UseVisualStyleBackColor = true;
+            this.RemoveChildButton.Location = new System.Drawing.Point(201, 700);
+            this.RemoveChildButton.Name = "RemoveChildButton";
+            this.RemoveChildButton.Size = new System.Drawing.Size(75, 38);
+            this.RemoveChildButton.TabIndex = 30;
+            this.RemoveChildButton.Text = "Remove Child";
+            this.RemoveChildButton.UseVisualStyleBackColor = true;
+            this.RemoveChildButton.Click += new System.EventHandler(this.RemoveChildButton_Click);
             // 
-            // button5
+            // AddChildButton
             // 
-            this.button5.Location = new System.Drawing.Point(120, 700);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 38);
-            this.button5.TabIndex = 29;
-            this.button5.Text = "Add Child";
-            this.button5.UseVisualStyleBackColor = true;
+            this.AddChildButton.Location = new System.Drawing.Point(120, 700);
+            this.AddChildButton.Name = "AddChildButton";
+            this.AddChildButton.Size = new System.Drawing.Size(75, 38);
+            this.AddChildButton.TabIndex = 29;
+            this.AddChildButton.Text = "Add Child";
+            this.AddChildButton.UseVisualStyleBackColor = true;
             // 
             // RemoveEffectButton
             // 
@@ -586,7 +587,7 @@
             this.variableNameLabel.TabIndex = 0;
             this.variableNameLabel.Text = "Name";
             // 
-            // Form1
+            // HTNEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -597,8 +598,8 @@
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "HTNEditorForm";
+            this.Text = "HTN Editor";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.actionBindingSource)).EndInit();
@@ -664,8 +665,8 @@
         private System.Windows.Forms.CheckBox PrimitiveActionCB;
         private System.Windows.Forms.Button DeleteActionButton;
         private System.Windows.Forms.Button CreateActionButton;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button RemoveChildButton;
+        private System.Windows.Forms.Button AddChildButton;
         private System.Windows.Forms.Button RemoveEffectButton;
         private System.Windows.Forms.Button AddEffectButton;
         private System.Windows.Forms.Button RemoveConditionButton;

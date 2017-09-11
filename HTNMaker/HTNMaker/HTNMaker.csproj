@@ -48,6 +48,12 @@
   <ItemGroup>
     <Compile Include="Action.cs" />
     <Compile Include="ActionDTO.cs" />
+    <Compile Include="AddChildForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddChildForm.Designer.cs">
+      <DependentUpon>AddChildForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +74,9 @@
     <Compile Include="StatementDTO.cs" />
     <Compile Include="Variable.cs" />
     <Compile Include="VariableDTO.cs" />
+    <EmbeddedResource Include="AddChildForm.resx">
+      <DependentUpon>AddChildForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

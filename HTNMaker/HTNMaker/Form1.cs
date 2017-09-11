@@ -15,10 +15,10 @@ using System.Windows.Forms;
 
 namespace HTNMaker
 {
-    public partial class Form1 : Form
+    public partial class HTNEditorForm : Form
     {
         public Model model { get; set; }
-        public Form1()
+        public HTNEditorForm()
         {
             InitializeComponent();
 
@@ -338,6 +338,11 @@ namespace HTNMaker
         private void RemoveEffectButton_Click(object sender, EventArgs e)
         {
             effectBindingSource.RemoveCurrent();
+        }
+
+        private void RemoveChildButton_Click(object sender, EventArgs e)
+        {
+            childActionBindingSource.RemoveCurrent();
         }
     }
 }

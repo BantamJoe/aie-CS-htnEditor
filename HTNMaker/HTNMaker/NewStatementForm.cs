@@ -13,11 +13,11 @@ namespace HTNMaker
     public enum StatementTypes { Condition, Effect };
     public partial class NewStatementForm : Form
     {
-        Form1 parent;
+        HTNEditorForm parent;
         public List<Variable> PossibleVariables { get; }
 
         public Statement CreatedStatement;
-        public NewStatementForm(Form1 parent, List<Variable> variables, StatementTypes type)
+        public NewStatementForm(HTNEditorForm parent, List<Variable> variables, StatementTypes type)
         {
             InitializeComponent();
             this.parent = parent;
