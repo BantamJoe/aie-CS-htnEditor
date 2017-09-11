@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace HTNMaker
 {
@@ -54,7 +55,7 @@ namespace HTNMaker
             topLevelActions = new List<Action>();
         }
 
-        public void Save(string filepath)
+        public void Save(Stream stream)
         {
             //TODO figure out what exceptions need handling
             ModelDAO dao = new ModelDAO();
@@ -70,7 +71,7 @@ namespace HTNMaker
             {
                 dao.Variables.Add(variable.CreateDTO());
             }
-            dao.Save(filepath);
+            dao.Save(stream);
         }
 
         public void Load(string filepath)

@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 //TODO add checkboxes to make an action primitive/root, disabled if those are invalid choices
 //TODO figure out read-only databinding
@@ -423,6 +424,16 @@ namespace HTNMaker
                     childList.Refresh();
                 }
             }
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            saveDialog.ShowDialog();
+            //TODO set save dialog options
+            //TODO only save if "save" chosen
+            Stream fs = saveDialog.OpenFile();
+            model.Save(fs);
         }
     }
 }

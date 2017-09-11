@@ -21,14 +21,11 @@ namespace HTNMaker
             TopLevelActions = new List<string>();
         }
 
-        public void Save(string filepath)
+        public void Save(Stream stream)
         {
             //TODO check filepath has .xml extension
             XmlSerializer serializer = new XmlSerializer(typeof(ModelDAO));
-            using (StreamWriter sw = new StreamWriter(filepath))
-            {
-                serializer.Serialize(sw, this);
-            }
+            serializer.Serialize(stream, this);
         }
 
         public static ModelDAO Load(string filepath)
