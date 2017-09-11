@@ -286,23 +286,58 @@ namespace HTNMaker
             DialogResult response = MessageBox.Show("Are you sure you want to delete " + selectedVariable.Name, "Delete Variable", MessageBoxButtons.YesNo);
             if(response == DialogResult.Yes)
             {
+                conditionsGridView.DataSource = null;
+                effectsGridView.DataSource = null;
+
                 // Remove variable from all actions
                 foreach (Action action in model.Actions)
                 {
-                    if (action == actionBindingSource.Current)
-                    {
-                        //TODO figure out how you're supposed to do this
-                        conditionBindingSource.RemoveAt(conditionBindingSource.Where(condition => condition.Variable == selectedVariable));
-                    }
-                    else
-                    {
+                    
                         action.removeCondition(selectedVariable);
                         action.removeEffect(selectedVariable);
-                    }
                 }
                 // Remove from list
                 variablesBindingSource.RemoveCurrent();
+
+                conditionsGridView.DataSource = conditionBindingSource;
+                effectsGridView.DataSource = effectBindingSource;
             }
+        }
+
+        private void AddConditionButton_Click(object sender, EventArgs e)
+        {
+            List<Variable> possibleVariables = new List<Variable>();
+            Action selectedAction = actionBindingSource.Current as Action;
+            possibleVariables.AddRange(model.Variables.Where(v => !selectedAction.Conditions.Any(c => c.Variable == v)));
+            NewStatementForm conditionStatementForm = new NewStatementForm(this, possibleVariables, StatementTypes.Condition);
+            conditionStatementForm.ShowDialog();
+            if(conditionStatementForm.DialogResult == DialogResult.OK)
+            {
+                conditionBindingSource.Add(conditionStatementForm.CreatedStatement);
+            }
+        }
+
+        private void AddEffectButton_Click(object sender, EventArgs e)
+        {
+            List<Variable> possibleVariables = new List<Variable>();
+            Action selectedAction = actionBindingSource.Current as Action;
+            possibleVariables.AddRange(model.Variables.Where(v => !selectedAction.Effects.Any(s => s.Variable == v)));
+            NewStatementForm effectStatementForm = new NewStatementForm(this, possibleVariables, StatementTypes.Effect);
+            effectStatementForm.ShowDialog();
+            if(effectStatementForm.DialogResult == DialogResult.OK)
+            {
+                effectBindingSource.Add(effectStatementForm.CreatedStatement);
+            }
+        }
+
+        private void RemoveConditionButton_Click(object sender, EventArgs e)
+        {
+            conditionBindingSource.RemoveCurrent();
+        }
+
+        private void RemoveEffectButton_Click(object sender, EventArgs e)
+        {
+            effectBindingSource.RemoveCurrent();
         }
     }
 }

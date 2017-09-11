@@ -53,17 +53,17 @@
             this.ActionEditTab = new System.Windows.Forms.TabPage();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.RemoveEffectButton = new System.Windows.Forms.Button();
+            this.AddEffectButton = new System.Windows.Forms.Button();
+            this.RemoveConditionButton = new System.Windows.Forms.Button();
+            this.AddConditionButton = new System.Windows.Forms.Button();
             this.PrimitiveActionCB = new System.Windows.Forms.CheckBox();
             this.effectsGridView = new System.Windows.Forms.DataGridView();
             this.variableDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.valueDataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.effectBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.conditionsGridView = new System.Windows.Forms.DataGridView();
-            this.variableDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.variableNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.valueDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.conditionBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label4 = new System.Windows.Forms.Label();
@@ -294,10 +294,10 @@
             this.ActionEditTab.AutoScroll = true;
             this.ActionEditTab.Controls.Add(this.button6);
             this.ActionEditTab.Controls.Add(this.button5);
-            this.ActionEditTab.Controls.Add(this.button4);
-            this.ActionEditTab.Controls.Add(this.button3);
-            this.ActionEditTab.Controls.Add(this.button2);
-            this.ActionEditTab.Controls.Add(this.button1);
+            this.ActionEditTab.Controls.Add(this.RemoveEffectButton);
+            this.ActionEditTab.Controls.Add(this.AddEffectButton);
+            this.ActionEditTab.Controls.Add(this.RemoveConditionButton);
+            this.ActionEditTab.Controls.Add(this.AddConditionButton);
             this.ActionEditTab.Controls.Add(this.PrimitiveActionCB);
             this.ActionEditTab.Controls.Add(this.effectsGridView);
             this.ActionEditTab.Controls.Add(this.conditionsGridView);
@@ -335,41 +335,45 @@
             this.button5.Text = "Add Child";
             this.button5.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // RemoveEffectButton
             // 
-            this.button4.Location = new System.Drawing.Point(195, 519);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 38);
-            this.button4.TabIndex = 28;
-            this.button4.Text = "Remove Effect";
-            this.button4.UseVisualStyleBackColor = true;
+            this.RemoveEffectButton.Location = new System.Drawing.Point(195, 519);
+            this.RemoveEffectButton.Name = "RemoveEffectButton";
+            this.RemoveEffectButton.Size = new System.Drawing.Size(75, 38);
+            this.RemoveEffectButton.TabIndex = 28;
+            this.RemoveEffectButton.Text = "Remove Effect";
+            this.RemoveEffectButton.UseVisualStyleBackColor = true;
+            this.RemoveEffectButton.Click += new System.EventHandler(this.RemoveEffectButton_Click);
             // 
-            // button3
+            // AddEffectButton
             // 
-            this.button3.Location = new System.Drawing.Point(112, 519);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 38);
-            this.button3.TabIndex = 27;
-            this.button3.Text = "Add Effect";
-            this.button3.UseVisualStyleBackColor = true;
+            this.AddEffectButton.Location = new System.Drawing.Point(112, 519);
+            this.AddEffectButton.Name = "AddEffectButton";
+            this.AddEffectButton.Size = new System.Drawing.Size(75, 38);
+            this.AddEffectButton.TabIndex = 27;
+            this.AddEffectButton.Text = "Add Effect";
+            this.AddEffectButton.UseVisualStyleBackColor = true;
+            this.AddEffectButton.Click += new System.EventHandler(this.AddEffectButton_Click);
             // 
-            // button2
+            // RemoveConditionButton
             // 
-            this.button2.Location = new System.Drawing.Point(195, 334);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 34);
-            this.button2.TabIndex = 26;
-            this.button2.Text = "Remove Condition";
-            this.button2.UseVisualStyleBackColor = true;
+            this.RemoveConditionButton.Location = new System.Drawing.Point(195, 334);
+            this.RemoveConditionButton.Name = "RemoveConditionButton";
+            this.RemoveConditionButton.Size = new System.Drawing.Size(75, 34);
+            this.RemoveConditionButton.TabIndex = 26;
+            this.RemoveConditionButton.Text = "Remove Condition";
+            this.RemoveConditionButton.UseVisualStyleBackColor = true;
+            this.RemoveConditionButton.Click += new System.EventHandler(this.RemoveConditionButton_Click);
             // 
-            // button1
+            // AddConditionButton
             // 
-            this.button1.Location = new System.Drawing.Point(112, 334);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(77, 34);
-            this.button1.TabIndex = 25;
-            this.button1.Text = "Add Condition";
-            this.button1.UseVisualStyleBackColor = true;
+            this.AddConditionButton.Location = new System.Drawing.Point(112, 334);
+            this.AddConditionButton.Name = "AddConditionButton";
+            this.AddConditionButton.Size = new System.Drawing.Size(77, 34);
+            this.AddConditionButton.TabIndex = 25;
+            this.AddConditionButton.Text = "Add Condition";
+            this.AddConditionButton.UseVisualStyleBackColor = true;
+            this.AddConditionButton.Click += new System.EventHandler(this.AddConditionButton_Click);
             // 
             // PrimitiveActionCB
             // 
@@ -425,7 +429,7 @@
             this.conditionsGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.conditionsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.conditionsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.variableDataGridViewTextBoxColumn,
+            this.variableNameDataGridViewTextBoxColumn,
             this.valueDataGridViewCheckBoxColumn});
             this.conditionsGridView.DataSource = this.conditionBindingSource;
             this.conditionsGridView.Location = new System.Drawing.Point(112, 205);
@@ -434,13 +438,13 @@
             this.conditionsGridView.TabIndex = 20;
             this.conditionsGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.conditionsGridView_CellContentClick);
             // 
-            // variableDataGridViewTextBoxColumn
+            // variableNameDataGridViewTextBoxColumn
             // 
-            this.variableDataGridViewTextBoxColumn.DataPropertyName = "VariableName";
-            this.variableDataGridViewTextBoxColumn.HeaderText = "Variable";
-            this.variableDataGridViewTextBoxColumn.Name = "variableDataGridViewTextBoxColumn";
-            this.variableDataGridViewTextBoxColumn.ReadOnly = true;
-            this.variableDataGridViewTextBoxColumn.Width = 70;
+            this.variableNameDataGridViewTextBoxColumn.DataPropertyName = "VariableName";
+            this.variableNameDataGridViewTextBoxColumn.HeaderText = "VariableName";
+            this.variableNameDataGridViewTextBoxColumn.Name = "variableNameDataGridViewTextBoxColumn";
+            this.variableNameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.variableNameDataGridViewTextBoxColumn.Width = 98;
             // 
             // valueDataGridViewCheckBoxColumn
             // 
@@ -451,9 +455,8 @@
             // 
             // conditionBindingSource
             // 
-            this.conditionBindingSource.AllowNew = false;
-            this.conditionBindingSource.DataSource = typeof(HTNMaker.Statement);
-            this.conditionBindingSource.CurrentChanged += new System.EventHandler(this.statementBindingSource_CurrentChanged);
+            this.conditionBindingSource.DataMember = "Conditions";
+            this.conditionBindingSource.DataSource = this.actionBindingSource;
             // 
             // label4
             // 
@@ -652,26 +655,26 @@
         private System.Windows.Forms.Label variableDescriptionLabel;
         private System.Windows.Forms.TextBox variableNameTB;
         private System.Windows.Forms.Label variableNameLabel;
-        private System.Windows.Forms.BindingSource conditionBindingSource;
         private System.Windows.Forms.DataGridView effectsGridView;
         private System.Windows.Forms.BindingSource effectBindingSource;
         private System.Windows.Forms.DataGridView conditionsGridView;
         private System.Windows.Forms.BindingSource childActionBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn variableDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewCheckBoxColumn valueDataGridViewCheckBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn variableDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn valueDataGridViewCheckBoxColumn;
         private System.Windows.Forms.CheckBox PrimitiveActionCB;
         private System.Windows.Forms.Button DeleteActionButton;
         private System.Windows.Forms.Button CreateActionButton;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button RemoveEffectButton;
+        private System.Windows.Forms.Button AddEffectButton;
+        private System.Windows.Forms.Button RemoveConditionButton;
+        private System.Windows.Forms.Button AddConditionButton;
         private System.Windows.Forms.Button DeleteVariableButton;
         private System.Windows.Forms.Button CreateVariableButton;
+        private System.Windows.Forms.BindingSource conditionBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn variableNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn valueDataGridViewCheckBoxColumn;
     }
 }
 

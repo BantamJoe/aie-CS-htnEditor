@@ -56,6 +56,12 @@
     </Compile>
     <Compile Include="Model.cs" />
     <Compile Include="ModelDAO.cs" />
+    <Compile Include="NewStatementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewStatementForm.Designer.cs">
+      <DependentUpon>NewStatementForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Statement.cs" />
@@ -64,6 +70,9 @@
     <Compile Include="VariableDTO.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewStatementForm.resx">
+      <DependentUpon>NewStatementForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -77,7 +86,9 @@
     <None Include="Properties\DataSources\Action.datasource" />
     <None Include="Properties\DataSources\Form1.datasource" />
     <None Include="Properties\DataSources\Model.datasource" />
+    <None Include="Properties\DataSources\NewStatementForm.datasource" />
     <None Include="Properties\DataSources\Statement.datasource" />
+    <None Include="Properties\DataSources\Variable.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
