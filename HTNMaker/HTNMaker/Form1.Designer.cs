@@ -40,13 +40,23 @@
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.elementTabControl = new System.Windows.Forms.TabControl();
             this.actionTab = new System.Windows.Forms.TabPage();
+            this.DeleteActionButton = new System.Windows.Forms.Button();
+            this.CreateActionButton = new System.Windows.Forms.Button();
             this.actionListBox = new System.Windows.Forms.ListBox();
             this.variablesTab = new System.Windows.Forms.TabPage();
+            this.DeleteVariableButton = new System.Windows.Forms.Button();
+            this.CreateVariableButton = new System.Windows.Forms.Button();
             this.variablesList = new System.Windows.Forms.ListBox();
             this.variablesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.editTabControl = new System.Windows.Forms.TabControl();
             this.ActionEditTab = new System.Windows.Forms.TabPage();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.PrimitiveActionCB = new System.Windows.Forms.CheckBox();
             this.effectsGridView = new System.Windows.Forms.DataGridView();
             this.variableDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,14 +80,6 @@
             this.variableDescriptionLabel = new System.Windows.Forms.Label();
             this.variableNameTB = new System.Windows.Forms.TextBox();
             this.variableNameLabel = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.actionBindingSource)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -172,8 +174,8 @@
             // 
             // actionTab
             // 
-            this.actionTab.Controls.Add(this.button8);
-            this.actionTab.Controls.Add(this.button7);
+            this.actionTab.Controls.Add(this.DeleteActionButton);
+            this.actionTab.Controls.Add(this.CreateActionButton);
             this.actionTab.Controls.Add(this.actionListBox);
             this.actionTab.Location = new System.Drawing.Point(4, 22);
             this.actionTab.Name = "actionTab";
@@ -182,6 +184,26 @@
             this.actionTab.TabIndex = 0;
             this.actionTab.Text = "Actions";
             this.actionTab.UseVisualStyleBackColor = true;
+            // 
+            // DeleteActionButton
+            // 
+            this.DeleteActionButton.Location = new System.Drawing.Point(98, 320);
+            this.DeleteActionButton.Name = "DeleteActionButton";
+            this.DeleteActionButton.Size = new System.Drawing.Size(75, 34);
+            this.DeleteActionButton.TabIndex = 2;
+            this.DeleteActionButton.Text = "Delete Action";
+            this.DeleteActionButton.UseVisualStyleBackColor = true;
+            this.DeleteActionButton.Click += new System.EventHandler(this.DeleteActionButton_Click);
+            // 
+            // CreateActionButton
+            // 
+            this.CreateActionButton.Location = new System.Drawing.Point(17, 320);
+            this.CreateActionButton.Name = "CreateActionButton";
+            this.CreateActionButton.Size = new System.Drawing.Size(75, 34);
+            this.CreateActionButton.TabIndex = 1;
+            this.CreateActionButton.Text = "Create Action";
+            this.CreateActionButton.UseVisualStyleBackColor = true;
+            this.CreateActionButton.Click += new System.EventHandler(this.CreateActionButton_Click);
             // 
             // actionListBox
             // 
@@ -197,6 +219,8 @@
             // 
             // variablesTab
             // 
+            this.variablesTab.Controls.Add(this.DeleteVariableButton);
+            this.variablesTab.Controls.Add(this.CreateVariableButton);
             this.variablesTab.Controls.Add(this.variablesList);
             this.variablesTab.Location = new System.Drawing.Point(4, 22);
             this.variablesTab.Name = "variablesTab";
@@ -205,6 +229,26 @@
             this.variablesTab.TabIndex = 1;
             this.variablesTab.Text = "Variables";
             this.variablesTab.UseVisualStyleBackColor = true;
+            // 
+            // DeleteVariableButton
+            // 
+            this.DeleteVariableButton.Location = new System.Drawing.Point(99, 307);
+            this.DeleteVariableButton.Name = "DeleteVariableButton";
+            this.DeleteVariableButton.Size = new System.Drawing.Size(75, 35);
+            this.DeleteVariableButton.TabIndex = 2;
+            this.DeleteVariableButton.Text = "Delete Variable";
+            this.DeleteVariableButton.UseVisualStyleBackColor = true;
+            this.DeleteVariableButton.Click += new System.EventHandler(this.DeleteVariableButton_Click);
+            // 
+            // CreateVariableButton
+            // 
+            this.CreateVariableButton.Location = new System.Drawing.Point(18, 307);
+            this.CreateVariableButton.Name = "CreateVariableButton";
+            this.CreateVariableButton.Size = new System.Drawing.Size(75, 35);
+            this.CreateVariableButton.TabIndex = 1;
+            this.CreateVariableButton.Text = "Create Variable";
+            this.CreateVariableButton.UseVisualStyleBackColor = true;
+            this.CreateVariableButton.Click += new System.EventHandler(this.CreateVariableButton_Click);
             // 
             // variablesList
             // 
@@ -272,6 +316,60 @@
             this.ActionEditTab.TabIndex = 0;
             this.ActionEditTab.Text = "Actions";
             this.ActionEditTab.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(201, 700);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 38);
+            this.button6.TabIndex = 30;
+            this.button6.Text = "Remove Child";
+            this.button6.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(120, 700);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 38);
+            this.button5.TabIndex = 29;
+            this.button5.Text = "Add Child";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(195, 519);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 38);
+            this.button4.TabIndex = 28;
+            this.button4.Text = "Remove Effect";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(112, 519);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 38);
+            this.button3.TabIndex = 27;
+            this.button3.Text = "Add Effect";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(195, 334);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 34);
+            this.button2.TabIndex = 26;
+            this.button2.Text = "Remove Condition";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(112, 334);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(77, 34);
+            this.button1.TabIndex = 25;
+            this.button1.Text = "Add Condition";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // PrimitiveActionCB
             // 
@@ -444,7 +542,7 @@
             this.variableEditTab.Location = new System.Drawing.Point(4, 22);
             this.variableEditTab.Name = "variableEditTab";
             this.variableEditTab.Padding = new System.Windows.Forms.Padding(3);
-            this.variableEditTab.Size = new System.Drawing.Size(322, 823);
+            this.variableEditTab.Size = new System.Drawing.Size(300, 823);
             this.variableEditTab.TabIndex = 1;
             this.variableEditTab.Text = "Variables";
             this.variableEditTab.UseVisualStyleBackColor = true;
@@ -484,78 +582,6 @@
             this.variableNameLabel.Size = new System.Drawing.Size(35, 13);
             this.variableNameLabel.TabIndex = 0;
             this.variableNameLabel.Text = "Name";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(114, 345);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 25;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(195, 345);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 26;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(112, 519);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 27;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(195, 519);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 28;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(120, 700);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 29;
-            this.button5.Text = "button5";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(201, 700);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
-            this.button6.TabIndex = 30;
-            this.button6.Text = "button6";
-            this.button6.UseVisualStyleBackColor = true;
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(17, 320);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 23);
-            this.button7.TabIndex = 1;
-            this.button7.Text = "button7";
-            this.button7.UseVisualStyleBackColor = true;
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(98, 320);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(75, 23);
-            this.button8.TabIndex = 2;
-            this.button8.Text = "button8";
-            this.button8.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -636,14 +662,16 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn variableDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn valueDataGridViewCheckBoxColumn;
         private System.Windows.Forms.CheckBox PrimitiveActionCB;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button DeleteActionButton;
+        private System.Windows.Forms.Button CreateActionButton;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button DeleteVariableButton;
+        private System.Windows.Forms.Button CreateVariableButton;
     }
 }
 

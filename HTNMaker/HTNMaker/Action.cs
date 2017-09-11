@@ -98,7 +98,12 @@ namespace HTNMaker
             }
 
         }
-        // TODO removeChild
+        
+        public void removeChild(Action action)
+        {
+            children.Remove(action);
+        }
+
         // TODO addCondition/effect, if already in list just change value
         public void addCondition(Variable variable, bool value)
         {
@@ -126,6 +131,15 @@ namespace HTNMaker
         }
 
         //TODO remove condition/effect
+        public void removeCondition(Variable variable)
+        {
+            conditions.RemoveAll(condition => condition.Variable == variable);
+        }
+
+        public void removeEffect(Variable variable)
+        {
+            effects.RemoveAll(effect => effect.Variable == variable);
+        }
 
         //TODO createDTO
         public ActionDTO CreateDTO()
