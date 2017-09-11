@@ -264,6 +264,7 @@
             // variablesBindingSource
             // 
             this.variablesBindingSource.DataSource = typeof(HTNMaker.Variable);
+            this.variablesBindingSource.CurrentChanged += new System.EventHandler(this.variablesBindingSource_CurrentChanged);
             // 
             // panel1
             // 
@@ -329,12 +330,14 @@
             // 
             // AddChildButton
             // 
+            this.AddChildButton.DataBindings.Add(new System.Windows.Forms.Binding("Enabled", this.actionBindingSource, "IsNotPrimitive", true));
             this.AddChildButton.Location = new System.Drawing.Point(120, 700);
             this.AddChildButton.Name = "AddChildButton";
             this.AddChildButton.Size = new System.Drawing.Size(75, 38);
             this.AddChildButton.TabIndex = 29;
             this.AddChildButton.Text = "Add Child";
             this.AddChildButton.UseVisualStyleBackColor = true;
+            this.AddChildButton.Click += new System.EventHandler(this.AddChildButton_Click);
             // 
             // RemoveEffectButton
             // 
@@ -393,6 +396,8 @@
             // 
             // effectsGridView
             // 
+            this.effectsGridView.AllowUserToAddRows = false;
+            this.effectsGridView.AllowUserToDeleteRows = false;
             this.effectsGridView.AutoGenerateColumns = false;
             this.effectsGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.effectsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -426,6 +431,8 @@
             // 
             // conditionsGridView
             // 
+            this.conditionsGridView.AllowUserToAddRows = false;
+            this.conditionsGridView.AllowUserToDeleteRows = false;
             this.conditionsGridView.AutoGenerateColumns = false;
             this.conditionsGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.conditionsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -442,10 +449,10 @@
             // variableNameDataGridViewTextBoxColumn
             // 
             this.variableNameDataGridViewTextBoxColumn.DataPropertyName = "VariableName";
-            this.variableNameDataGridViewTextBoxColumn.HeaderText = "VariableName";
+            this.variableNameDataGridViewTextBoxColumn.HeaderText = "Variable";
             this.variableNameDataGridViewTextBoxColumn.Name = "variableNameDataGridViewTextBoxColumn";
             this.variableNameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.variableNameDataGridViewTextBoxColumn.Width = 98;
+            this.variableNameDataGridViewTextBoxColumn.Width = 70;
             // 
             // valueDataGridViewCheckBoxColumn
             // 

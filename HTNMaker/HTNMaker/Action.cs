@@ -37,6 +37,8 @@ namespace HTNMaker
             }
         }
         
+        public bool IsNotPrimitive
+        { get { return !primitive; } }
 
         public bool HasNoChildren
         {
@@ -68,6 +70,28 @@ namespace HTNMaker
             get { return children.AsReadOnly(); }
         }
 
+        private bool descendantsDirty;
+
+        private HashSet<Action> descendants;
+
+        public HashSet<Action> Descendants
+        {
+            get
+            {
+                if (descendantsDirty)
+                {
+                    foreach (Action child in children)
+                    {
+                        descendants.Add(child);
+                        descendants.UnionWith(child.Descendants);
+                    }
+                    descendantsDirty = false;
+                }
+                return descendants;
+                
+            }
+        }
+
         public Action(string name, string description = "", bool primitive = false)
         {
             this.name = name;
@@ -75,6 +99,8 @@ namespace HTNMaker
             conditions = new List<Statement>();
             effects = new List<Statement>();
             children = new List<Action>();
+            descendantsDirty = true;
+            descendants = new HashSet<Action>();
         }
 
         // TODO addChild: check if valid to add, not creating a loop, not already in children
@@ -94,6 +120,7 @@ namespace HTNMaker
             } else
             {
                 children.Add(action);
+                descendantsDirty = true;
                 return 0;
             }
 
@@ -101,6 +128,7 @@ namespace HTNMaker
         
         public void removeChild(Action action)
         {
+            descendantsDirty = true;
             children.Remove(action);
         }
 

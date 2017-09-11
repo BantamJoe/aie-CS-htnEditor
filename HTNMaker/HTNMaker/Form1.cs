@@ -91,10 +91,22 @@ namespace HTNMaker
 
         private void actionBindingSource_CurrentChanged(object sender, EventArgs e)
         {
-            Action action = actionBindingSource.Current as Action;
-            conditionBindingSource.DataSource = action.Conditions;
-            effectBindingSource.DataSource = action.Effects;
-            childActionBindingSource.DataSource = action.Children;
+            if (actionBindingSource.Current != null)
+            {
+                Action action = actionBindingSource.Current as Action;
+                conditionBindingSource.DataSource = action.Conditions;
+                effectBindingSource.DataSource = action.Effects;
+                childActionBindingSource.DataSource = action.Children;
+                selectedNameTB.Enabled = true;
+                selectedDescriptionTB.Enabled = true;
+            } else
+            {
+                conditionBindingSource.DataSource = null;
+                effectBindingSource.DataSource = null;
+                childActionBindingSource.DataSource = null;
+                selectedNameTB.Enabled = false;
+                selectedDescriptionTB.Enabled = false;
+            }
         }
 
         private void conditionsGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -104,28 +116,33 @@ namespace HTNMaker
 
         private void selectedNameTB_Validating(object sender, CancelEventArgs e)
         {
-            Action selectedAction = actionBindingSource.Current as Action;
-            string errorMsg;
-            if (!IsValidActionName(selectedNameTB.Text, selectedAction, out errorMsg))
+            if (actionBindingSource.Current != null)
             {
-                actionBindingSource.CancelEdit();
-                e.Cancel = true;
-                selectedNameTB.SelectAll();
-                MessageBox.Show(errorMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                Action selectedAction = actionBindingSource.Current as Action;
+                string errorMsg;
+                if (!IsValidActionName(selectedNameTB.Text, selectedAction, out errorMsg))
+                {
+                    actionBindingSource.CancelEdit();
+                    e.Cancel = true;
+                    selectedNameTB.SelectAll();
+                    MessageBox.Show(errorMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
             }
-
         }
 
         private void variableNameTB_Validating(object sender, CancelEventArgs e)
         {
-            Variable selectedVariable = variablesBindingSource.Current as Variable;
-            string errorMsg;
-            if (!IsValidVariableName(variableNameTB.Text, selectedVariable, out errorMsg))
+            if (variablesBindingSource.Current != null)
             {
-                variablesBindingSource.CancelEdit();
-                e.Cancel = true;
-                variableNameTB.SelectAll();
-                MessageBox.Show(errorMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                Variable selectedVariable = variablesBindingSource.Current as Variable;
+                string errorMsg;
+                if (!IsValidVariableName(variableNameTB.Text, selectedVariable, out errorMsg))
+                {
+                    variablesBindingSource.CancelEdit();
+                    e.Cancel = true;
+                    variableNameTB.SelectAll();
+                    MessageBox.Show(errorMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
             }
         }
 
@@ -180,14 +197,17 @@ namespace HTNMaker
 
         private void PrimitiveActionCB_Validating(object sender, CancelEventArgs e)
         {
-            Action selectedAction = actionBindingSource.Current as Action;
-            // Cannot be checked if selected action has any children
-            if (!selectedAction.HasNoChildren && PrimitiveActionCB.Checked)
+            if (actionBindingSource.Current != null)
             {
-                actionBindingSource.CancelEdit();
-                e.Cancel = true;
-                MessageBox.Show("Actions with children cannot be set as primitive", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                Action selectedAction = actionBindingSource.Current as Action;
+                // Cannot be checked if selected action has any children
+                if (!selectedAction.HasNoChildren && PrimitiveActionCB.Checked)
+                {
+                    actionBindingSource.CancelEdit();
+                    e.Cancel = true;
+                    MessageBox.Show("Actions with children cannot be set as primitive", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
+                }
             }
         }
 
@@ -266,83 +286,143 @@ namespace HTNMaker
 
         private void DeleteActionButton_Click(object sender, EventArgs e)
         {
-            Action selectedAction = actionBindingSource.Current as Action;
-            DialogResult response = MessageBox.Show("Are you sure you want to delete " + selectedAction.Name, "Delete Action", MessageBoxButtons.YesNo);
-            if(response == DialogResult.Yes)
+            if (actionBindingSource.Current != null)
             {
-                // Remove selected action from all parents
-                foreach(Action action in model.Actions)
+                Action selectedAction = actionBindingSource.Current as Action;
+                DialogResult response = MessageBox.Show("Are you sure you want to delete " + selectedAction.Name, "Delete Action", MessageBoxButtons.YesNo);
+                if (response == DialogResult.Yes)
                 {
-                    action.removeChild(selectedAction);
+                    // Remove selected action from all parents
+                    foreach (Action action in model.Actions)
+                    {
+                        action.removeChild(selectedAction);
+                    }
+                    // Remove selected action from list
+                    actionBindingSource.RemoveCurrent();
                 }
-                // Remove selected action from list
-                actionBindingSource.RemoveCurrent();
             }
         }
 
         private void DeleteVariableButton_Click(object sender, EventArgs e)
         {
-            Variable selectedVariable = variablesBindingSource.Current as Variable;
-            DialogResult response = MessageBox.Show("Are you sure you want to delete " + selectedVariable.Name, "Delete Variable", MessageBoxButtons.YesNo);
-            if(response == DialogResult.Yes)
+            if (variablesBindingSource.Current != null)
             {
-                conditionsGridView.DataSource = null;
-                effectsGridView.DataSource = null;
-
-                // Remove variable from all actions
-                foreach (Action action in model.Actions)
+                Variable selectedVariable = variablesBindingSource.Current as Variable;
+                DialogResult response = MessageBox.Show("Are you sure you want to delete " + selectedVariable.Name, "Delete Variable", MessageBoxButtons.YesNo);
+                if (response == DialogResult.Yes)
                 {
-                    
+                    conditionsGridView.DataSource = null;
+                    effectsGridView.DataSource = null;
+
+                    // Remove variable from all actions
+                    foreach (Action action in model.Actions)
+                    {
+
                         action.removeCondition(selectedVariable);
                         action.removeEffect(selectedVariable);
-                }
-                // Remove from list
-                variablesBindingSource.RemoveCurrent();
+                    }
+                    // Remove from list
+                    variablesBindingSource.RemoveCurrent();
 
-                conditionsGridView.DataSource = conditionBindingSource;
-                effectsGridView.DataSource = effectBindingSource;
+                    conditionsGridView.DataSource = conditionBindingSource;
+                    effectsGridView.DataSource = effectBindingSource;
+                }
             }
         }
 
         private void AddConditionButton_Click(object sender, EventArgs e)
         {
-            List<Variable> possibleVariables = new List<Variable>();
-            Action selectedAction = actionBindingSource.Current as Action;
-            possibleVariables.AddRange(model.Variables.Where(v => !selectedAction.Conditions.Any(c => c.Variable == v)));
-            NewStatementForm conditionStatementForm = new NewStatementForm(this, possibleVariables, StatementTypes.Condition);
-            conditionStatementForm.ShowDialog();
-            if(conditionStatementForm.DialogResult == DialogResult.OK)
+            if (actionBindingSource.Current != null)
             {
-                conditionBindingSource.Add(conditionStatementForm.CreatedStatement);
+                List<Variable> possibleVariables = new List<Variable>();
+                Action selectedAction = actionBindingSource.Current as Action;
+                possibleVariables.AddRange(model.Variables.Where(v => !selectedAction.Conditions.Any(c => c.Variable == v)));
+                NewStatementForm conditionStatementForm = new NewStatementForm(this, possibleVariables, StatementTypes.Condition);
+                conditionStatementForm.ShowDialog();
+                if (conditionStatementForm.DialogResult == DialogResult.OK)
+                {
+                    conditionBindingSource.Add(conditionStatementForm.CreatedStatement);
+                }
             }
         }
 
         private void AddEffectButton_Click(object sender, EventArgs e)
         {
-            List<Variable> possibleVariables = new List<Variable>();
-            Action selectedAction = actionBindingSource.Current as Action;
-            possibleVariables.AddRange(model.Variables.Where(v => !selectedAction.Effects.Any(s => s.Variable == v)));
-            NewStatementForm effectStatementForm = new NewStatementForm(this, possibleVariables, StatementTypes.Effect);
-            effectStatementForm.ShowDialog();
-            if(effectStatementForm.DialogResult == DialogResult.OK)
+            if (actionBindingSource.Current != null)
             {
-                effectBindingSource.Add(effectStatementForm.CreatedStatement);
+                List<Variable> possibleVariables = new List<Variable>();
+                Action selectedAction = actionBindingSource.Current as Action;
+                possibleVariables.AddRange(model.Variables.Where(v => !selectedAction.Effects.Any(s => s.Variable == v)));
+                NewStatementForm effectStatementForm = new NewStatementForm(this, possibleVariables, StatementTypes.Effect);
+                effectStatementForm.ShowDialog();
+                if (effectStatementForm.DialogResult == DialogResult.OK)
+                {
+                    effectBindingSource.Add(effectStatementForm.CreatedStatement);
+                }
             }
         }
 
         private void RemoveConditionButton_Click(object sender, EventArgs e)
         {
-            conditionBindingSource.RemoveCurrent();
+            if (conditionBindingSource.Current != null)
+            {
+                conditionBindingSource.RemoveCurrent();
+            }
         }
 
         private void RemoveEffectButton_Click(object sender, EventArgs e)
         {
-            effectBindingSource.RemoveCurrent();
+            if (effectBindingSource.Current != null)
+            {
+                effectBindingSource.RemoveCurrent();
+            }
         }
+
 
         private void RemoveChildButton_Click(object sender, EventArgs e)
         {
-            childActionBindingSource.RemoveCurrent();
+            if (childActionBindingSource.Current != null)
+            {
+                Action childAction = childActionBindingSource.Current as Action;
+                Action parent = actionBindingSource.Current as Action;
+                childActionBindingSource.DataSource = null;
+                parent.removeChild(childAction);
+                childActionBindingSource.DataSource = parent.Children;
+            }
+        }
+
+        private void variablesBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+            if(variablesBindingSource.Current != null)
+            {
+                variableNameTB.Enabled = true;
+                variableDescriptionTB.Enabled = true;
+            } else
+            {
+                variableNameTB.Enabled = false;
+                variableDescriptionTB.Enabled = false;
+            }
+        }
+
+        private void AddChildButton_Click(object sender, EventArgs e)
+        {
+            List<Action> possibleActions = new List<Action>();
+            Action selectedAction = actionBindingSource.Current as Action;
+            //
+            possibleActions.AddRange(model.Actions.Where(a => (a != selectedAction) &&
+                                                                !(a as Action).Descendants.Any(d => d == selectedAction) &&
+                                                                !selectedAction.Descendants.Any(d => d == a)));
+            if (possibleActions.Count != 0)
+            {
+                AddChildForm childForm = new AddChildForm(possibleActions);
+                childForm.ShowDialog();
+                if (childForm.DialogResult == DialogResult.OK)
+                {
+                    //TODO handle errors
+                    selectedAction.addChild(childForm.ChosenAction);
+                    childList.Refresh();
+                }
+            }
         }
     }
 }
