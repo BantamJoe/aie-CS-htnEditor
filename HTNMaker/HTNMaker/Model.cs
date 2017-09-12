@@ -74,41 +74,102 @@ namespace HTNMaker
             dao.Save(stream);
         }
 
-        public void Load(string filepath)
+        public void Load(Stream stream)
         {
             //TODO figure out what exceptions need to be handled
 
-            ModelDAO dao = ModelDAO.Load(filepath);
+            ModelDAO dao = ModelDAO.Load(stream);
+
+            List<Action> loadedActions = new List<Action>();
+            List<Variable> loadedVariables = new List<Variable>();
+            List<Action> loadedTopActions = new List<Action>();
+
 
             // TODO create variables from DAO
             foreach(VariableDTO varDTO in dao.Variables)
             {
-                variables.Add(new Variable(varDTO));
+                loadedVariables.Add(new Variable(varDTO));
             }
-            // TODO create actions from DAO, using named variables (possible exception: name not found)
+            // TODO create actions from DAO, using named variables 
             foreach(ActionDTO actDTO in dao.Actions)
             {
                 Action action = new Action(actDTO.Name, actDTO.Description, actDTO.IsPrimitive);
-                foreach(StatementDTO stateDTO in actDTO.Conditions)
+                // Add conditions, effects
+                foreach (StatementDTO stateDTO in actDTO.Conditions)
                 {
-                    //TODO exception if not found
-                    Variable variable = variables.Find((Variable v) => { return v.Name == stateDTO.Variable; });
-                    action.addCondition(variable, stateDTO.Value);
+                    Variable variable = loadedVariables.Find((Variable v) => { return v.Name == stateDTO.Variable; });
+                    if (variable != null)
+                    {
+                        action.addCondition(variable, stateDTO.Value);
+                    } else
+                    {
+                        throw new InvalidDataException("Variable \"" + stateDTO.Variable + "\" used as condition of \"" + action.Name + "\" could not be found");
+                    }
                 }
                 foreach (StatementDTO stateDTO in actDTO.Effects)
                 {
-                    //TODO exception if not found
-                    Variable variable = variables.Find((Variable v) => { return v.Name == stateDTO.Variable; });
-                    action.addEffect(variable, stateDTO.Value);
+                    Variable variable = loadedVariables.Find((Variable v) => { return v.Name == stateDTO.Variable; });
+                    if (variable != null)
+                    {
+                        action.addEffect(variable, stateDTO.Value);
+                    } else
+                    {
+                        throw new InvalidDataException("Variable \"" + stateDTO.Variable + "\" used as effect of \"" + action.Name + "\" could not be found");
+                    }
                 }
             }
-            // TODO set action children based on names in DTO (possible exception: name not found)
+            // set action children based on names in DTO 
             foreach (ActionDTO actDTO in dao.Actions)
             {
-                // TODO try to find child by name, exception if not found
-                // TODO try to add child, exception on relevant error code
+                Action action = loadedActions.Find(a => { return a.Name == actDTO.Name; });
+                foreach (string childName in actDTO.Children)
+                {
+                    // try to find child by name, exception if not found
+                    Action child = loadedActions.Find(a => { return a.Name == childName; });
+                    if(child != null)
+                    {
+                        // try to add child, exception on relevant error code
+                        int resultCode = action.addChild(child);
+                        switch (resultCode)
+                        {
+                            case 0:
+                                break;
+                            case 1:
+                                throw new InvalidDataException("Child action \"" + childName + "\" cannot be added to  \"" + action.Name + "\": \"" + action.Name + "\" is primitive");
+                                break;
+                            case 2:
+                                // Action added twice, no need to throw exception
+                                break;
+                            case 3:
+                                throw new InvalidDataException("Child action \"" + childName + "\" cannot be added to  \"" + action.Name + "\": Cycle detected");
+                                break;
+                            default:
+                                //TODO throw exception
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        throw new InvalidDataException("Child action \"" + childName + "\" of action \"" + action.Name + "\" could not be found");
+                    }
+                }
+                
             }
                 // TODO set top level actions (possible exception: name not found)
+            foreach(string actionName in dao.TopLevelActions)
+            {
+                Action action = loadedActions.Find(a => { return a.Name == actionName; });
+                if(action != null)
+                {
+                    loadedTopActions.Add(action);
+                } else
+                {
+                    throw new InvalidDataException("Root level action \""+actionName+"\" could not be found");
+                }
             }
+            actions = loadedActions;
+            variables = loadedVariables;
+            topLevelActions = loadedTopActions;
+        }
     }
 }

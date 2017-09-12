@@ -47,11 +47,6 @@ namespace HTNMaker
 
         }
 
-        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void tabPage1_Click(object sender, EventArgs e)
         {
 
@@ -429,11 +424,62 @@ namespace HTNMaker
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveDialog = new SaveFileDialog();
-            saveDialog.ShowDialog();
-            //TODO set save dialog options
-            //TODO only save if "save" chosen
-            Stream fs = saveDialog.OpenFile();
-            model.Save(fs);
+            saveDialog.CreatePrompt = true;
+            saveDialog.Filter = "XML Files (*.xml)|*.xml";
+            saveDialog.DefaultExt = "xml";
+            DialogResult result = saveDialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                Stream fs = null;
+                try
+                {
+                    fs = saveDialog.OpenFile();
+                    if (fs != null)
+                    {
+                        using (fs)
+                        {
+                            model.Save(fs);
+                        }
+                    }
+                    
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                } 
+
+                
+            }
+        }
+
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //TODO catch InvalidOperationException, 
+            OpenFileDialog loadDialog = new OpenFileDialog();
+            loadDialog.Filter = "xml files (*.xml)|*.xml";
+            Stream fs = null;
+            if(loadDialog.ShowDialog() == DialogResult.OK)
+            {
+                actionBindingSource.DataSource = null;
+                variablesBindingSource.DataSource = null;
+                try
+                {
+                    fs = loadDialog.OpenFile();
+                    if(fs != null)
+                    {
+                        using (fs)
+                        {
+                            model.Load(fs);
+                        }
+                    }
+                } catch(Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+
+                actionBindingSource.DataSource = model.Actions;
+                variablesBindingSource.DataSource = model.Variables;
+            }
         }
     }
 }

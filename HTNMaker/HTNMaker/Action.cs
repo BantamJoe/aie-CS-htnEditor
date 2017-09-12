@@ -122,7 +122,7 @@ namespace HTNMaker
             else if (children.Contains(action))
             {
                 return 2; // 2 for child already exists
-            } else if (action == this || isDescendant(action))
+            } else if (action == this || action.Descendants.Contains(this))
             {
                 return 3; // 3 for possible loop
             } else
@@ -209,24 +209,6 @@ namespace HTNMaker
             }
 
             return dto;
-        }
-
-        public bool isDescendant(Action action)
-        {
-            if (children.Contains(action))
-            {
-                return true;
-            } else
-            {
-                foreach(Action child in children)
-                {
-                    if (child.isDescendant(action))
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
         }
     }
 }

@@ -23,23 +23,30 @@ namespace HTNMaker
 
         public void Save(Stream stream)
         {
-            //TODO check filepath has .xml extension
             XmlSerializer serializer = new XmlSerializer(typeof(ModelDAO));
             serializer.Serialize(stream, this);
         }
 
-        public static ModelDAO Load(string filepath)
+        public static ModelDAO Load(Stream stream)
         {
             // TODO check filepath extension
             XmlSerializer serializer = new XmlSerializer(typeof(ModelDAO));
             ModelDAO dao;
-            using (StreamReader sr = new StreamReader(filepath))
+            dao = serializer.Deserialize(stream) as ModelDAO;
+            // check no two variable share a name, throw exception if so
+            HashSet<String> hs = new HashSet<string>();
+            bool varUniqueNames = dao.Variables.All(x => hs.Add(x.Name));
+            if (!varUniqueNames)
             {
-                dao = serializer.Deserialize(sr) as ModelDAO;
+                throw new InvalidDataException("Variable name collision");
             }
-            // TODO check no two variable share a name, throw exception if so
-            // TODO check no actions share a name, throw exception if so
-            // TODO remove duplicates in top level actions
+            hs.Clear();
+            // check no actions share a name, throw exception if so
+            bool actionUniqueNames = dao.Actions.All(x => hs.Add(x.Name));
+            if(!actionUniqueNames)
+            {
+                throw new InvalidDataException("Action name collision");
+            }
             return dao;
         }
     }
