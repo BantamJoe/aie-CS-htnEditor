@@ -116,6 +116,24 @@
       </Effects>
       <Children />
     </ActionDTO>
+    <ActionDTO>
+      <Name>DrawWeapon</Name>
+      <Description />
+      <IsPrimitive>true</IsPrimitive>
+      <Conditions>
+        <StatementDTO>
+          <Variable>WeaponArmed</Variable>
+          <Value>false</Value>
+        </StatementDTO>
+      </Conditions>
+      <Effects>
+        <StatementDTO>
+          <Variable>WeaponArmed</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+      </Effects>
+      <Children />
+    </ActionDTO>
   </Actions>
   <Variables>
     <VariableDTO>

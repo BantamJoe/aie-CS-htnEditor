@@ -276,6 +276,7 @@ namespace HTNMaker
                     // Remove selected action from list
                     actionBindingSource.RemoveCurrent();
                     model.TopLevelActions.Remove(selectedAction);
+                    //TODO check for any nodecontrols with removed action
                 }
             }
         }
@@ -422,6 +423,7 @@ namespace HTNMaker
         {
             model = new Model();
             bindDataSources();
+            //TODO remove nodes from graph
         }
 
         private void save()
@@ -457,7 +459,6 @@ namespace HTNMaker
 
         private void load()
         {
-            //TODO catch InvalidOperationException, 
             OpenFileDialog loadDialog = new OpenFileDialog();
             loadDialog.Filter = "xml files (*.xml)|*.xml";
             Stream fs = null;
@@ -481,6 +482,7 @@ namespace HTNMaker
 
                 bindDataSources();
             }
+            //TODO remove nodes from graph
         }
 
         private void bindDataSources()

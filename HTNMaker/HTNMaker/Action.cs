@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -64,10 +65,11 @@ namespace HTNMaker
             set { effects = value; }
         }
 
-        private List<Action> children;
-        public IReadOnlyCollection<Action> Children
+        private ObservableCollection<Action> children;
+        private ReadOnlyObservableCollection<Action> readOnlyChildren;
+        public ReadOnlyObservableCollection<Action> Children
         {
-            get { return children.AsReadOnly(); }
+            get { return readOnlyChildren; }
         }
 
         private List<Action> parents;
@@ -105,7 +107,8 @@ namespace HTNMaker
             this.Description = description;
             conditions = new List<Statement>();
             effects = new List<Statement>();
-            children = new List<Action>();
+            children = new ObservableCollection<Action>();
+            readOnlyChildren = new ReadOnlyObservableCollection<Action>(children);
             parents = new List<Action>();
             descendantsDirty = true;
             descendants = new HashSet<Action>();
@@ -176,8 +179,7 @@ namespace HTNMaker
                 effects[index].Value = value;
             }
         }
-
-        //TODO remove condition/effect
+        
         public void removeCondition(Variable variable)
         {
             conditions.RemoveAll(condition => condition.Variable == variable);

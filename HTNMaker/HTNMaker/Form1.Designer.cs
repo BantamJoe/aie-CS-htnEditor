@@ -52,6 +52,11 @@
             this.DeleteActionButton = new System.Windows.Forms.Button();
             this.CreateActionButton = new System.Windows.Forms.Button();
             this.actionListBox = new System.Windows.Forms.ListBox();
+            this.rootActionsTab = new System.Windows.Forms.TabPage();
+            this.removeRootActionButton = new System.Windows.Forms.Button();
+            this.addRootActionButton = new System.Windows.Forms.Button();
+            this.rootActionListBox = new System.Windows.Forms.ListBox();
+            this.rootActionBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.variablesTab = new System.Windows.Forms.TabPage();
             this.DeleteVariableButton = new System.Windows.Forms.Button();
             this.CreateVariableButton = new System.Windows.Forms.Button();
@@ -89,16 +94,13 @@
             this.variableDescriptionLabel = new System.Windows.Forms.Label();
             this.variableNameTB = new System.Windows.Forms.TextBox();
             this.variableNameLabel = new System.Windows.Forms.Label();
-            this.rootActionsTab = new System.Windows.Forms.TabPage();
-            this.rootActionListBox = new System.Windows.Forms.ListBox();
-            this.addRootActionButton = new System.Windows.Forms.Button();
-            this.removeRootActionButton = new System.Windows.Forms.Button();
-            this.rootActionBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.actionBindingSource)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.elementTabControl.SuspendLayout();
             this.actionTab.SuspendLayout();
+            this.rootActionsTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.rootActionBindingSource)).BeginInit();
             this.variablesTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.variablesBindingSource)).BeginInit();
             this.editTabControl.SuspendLayout();
@@ -109,8 +111,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.conditionBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.childActionBindingSource)).BeginInit();
             this.variableEditTab.SuspendLayout();
-            this.rootActionsTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.rootActionBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -320,6 +320,53 @@
             this.actionListBox.Name = "actionListBox";
             this.actionListBox.Size = new System.Drawing.Size(192, 290);
             this.actionListBox.TabIndex = 0;
+            // 
+            // rootActionsTab
+            // 
+            this.rootActionsTab.Controls.Add(this.removeRootActionButton);
+            this.rootActionsTab.Controls.Add(this.addRootActionButton);
+            this.rootActionsTab.Controls.Add(this.rootActionListBox);
+            this.rootActionsTab.Location = new System.Drawing.Point(4, 22);
+            this.rootActionsTab.Name = "rootActionsTab";
+            this.rootActionsTab.Padding = new System.Windows.Forms.Padding(3);
+            this.rootActionsTab.Size = new System.Drawing.Size(192, 433);
+            this.rootActionsTab.TabIndex = 2;
+            this.rootActionsTab.Text = "Root Actions";
+            this.rootActionsTab.UseVisualStyleBackColor = true;
+            // 
+            // removeRootActionButton
+            // 
+            this.removeRootActionButton.Location = new System.Drawing.Point(99, 305);
+            this.removeRootActionButton.Name = "removeRootActionButton";
+            this.removeRootActionButton.Size = new System.Drawing.Size(75, 35);
+            this.removeRootActionButton.TabIndex = 2;
+            this.removeRootActionButton.Text = "Remove Action";
+            this.removeRootActionButton.UseVisualStyleBackColor = true;
+            this.removeRootActionButton.Click += new System.EventHandler(this.removeRootActionButton_Click);
+            // 
+            // addRootActionButton
+            // 
+            this.addRootActionButton.Location = new System.Drawing.Point(18, 305);
+            this.addRootActionButton.Name = "addRootActionButton";
+            this.addRootActionButton.Size = new System.Drawing.Size(75, 35);
+            this.addRootActionButton.TabIndex = 1;
+            this.addRootActionButton.Text = "Add Action";
+            this.addRootActionButton.UseVisualStyleBackColor = true;
+            this.addRootActionButton.Click += new System.EventHandler(this.addRootActionButton_Click);
+            // 
+            // rootActionListBox
+            // 
+            this.rootActionListBox.DataSource = this.rootActionBindingSource;
+            this.rootActionListBox.DisplayMember = "Name";
+            this.rootActionListBox.FormattingEnabled = true;
+            this.rootActionListBox.Location = new System.Drawing.Point(0, 0);
+            this.rootActionListBox.Name = "rootActionListBox";
+            this.rootActionListBox.Size = new System.Drawing.Size(192, 277);
+            this.rootActionListBox.TabIndex = 0;
+            // 
+            // rootActionBindingSource
+            // 
+            this.rootActionBindingSource.DataSource = typeof(HTNMaker.Action);
             // 
             // variablesTab
             // 
@@ -698,53 +745,6 @@
             this.variableNameLabel.TabIndex = 0;
             this.variableNameLabel.Text = "Name";
             // 
-            // rootActionsTab
-            // 
-            this.rootActionsTab.Controls.Add(this.removeRootActionButton);
-            this.rootActionsTab.Controls.Add(this.addRootActionButton);
-            this.rootActionsTab.Controls.Add(this.rootActionListBox);
-            this.rootActionsTab.Location = new System.Drawing.Point(4, 22);
-            this.rootActionsTab.Name = "rootActionsTab";
-            this.rootActionsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.rootActionsTab.Size = new System.Drawing.Size(192, 433);
-            this.rootActionsTab.TabIndex = 2;
-            this.rootActionsTab.Text = "Root Actions";
-            this.rootActionsTab.UseVisualStyleBackColor = true;
-            // 
-            // rootActionListBox
-            // 
-            this.rootActionListBox.DataSource = this.rootActionBindingSource;
-            this.rootActionListBox.DisplayMember = "Name";
-            this.rootActionListBox.FormattingEnabled = true;
-            this.rootActionListBox.Location = new System.Drawing.Point(0, 0);
-            this.rootActionListBox.Name = "rootActionListBox";
-            this.rootActionListBox.Size = new System.Drawing.Size(192, 277);
-            this.rootActionListBox.TabIndex = 0;
-            // 
-            // addRootActionButton
-            // 
-            this.addRootActionButton.Location = new System.Drawing.Point(18, 305);
-            this.addRootActionButton.Name = "addRootActionButton";
-            this.addRootActionButton.Size = new System.Drawing.Size(75, 35);
-            this.addRootActionButton.TabIndex = 1;
-            this.addRootActionButton.Text = "Add Action";
-            this.addRootActionButton.UseVisualStyleBackColor = true;
-            this.addRootActionButton.Click += new System.EventHandler(this.addRootActionButton_Click);
-            // 
-            // removeRootActionButton
-            // 
-            this.removeRootActionButton.Location = new System.Drawing.Point(99, 305);
-            this.removeRootActionButton.Name = "removeRootActionButton";
-            this.removeRootActionButton.Size = new System.Drawing.Size(75, 35);
-            this.removeRootActionButton.TabIndex = 2;
-            this.removeRootActionButton.Text = "Remove Action";
-            this.removeRootActionButton.UseVisualStyleBackColor = true;
-            this.removeRootActionButton.Click += new System.EventHandler(this.removeRootActionButton_Click);
-            // 
-            // rootActionBindingSource
-            // 
-            this.rootActionBindingSource.DataSource = typeof(HTNMaker.Action);
-            // 
             // HTNEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -765,6 +765,8 @@
             this.toolStrip1.PerformLayout();
             this.elementTabControl.ResumeLayout(false);
             this.actionTab.ResumeLayout(false);
+            this.rootActionsTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.rootActionBindingSource)).EndInit();
             this.variablesTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.variablesBindingSource)).EndInit();
             this.editTabControl.ResumeLayout(false);
@@ -777,8 +779,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.childActionBindingSource)).EndInit();
             this.variableEditTab.ResumeLayout(false);
             this.variableEditTab.PerformLayout();
-            this.rootActionsTab.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.rootActionBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
