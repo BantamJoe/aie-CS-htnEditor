@@ -60,7 +60,7 @@ namespace HTNMaker
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            Rectangle drawRect = new Rectangle(0, 0, panel1.Width, panel1.Height);
+            Rectangle drawRect = new Rectangle(0, 0, graphPanel.Width, graphPanel.Height);
 
             using (Pen gridPen = new Pen(Color.Beige))
             {
@@ -68,13 +68,13 @@ namespace HTNMaker
                 using (Brush bgBrush = new SolidBrush(Color.Gray))
                 {
                     g.FillRectangle(bgBrush, drawRect);
-                    for (int x = 0; x < panel1.Width; x += 40)
+                    for (int x = 0; x < graphPanel.Width; x += 40)
                     {
-                        g.DrawLine(gridPen, new Point(x, 0), new Point(x, panel1.Height));
+                        g.DrawLine(gridPen, new Point(x, 0), new Point(x, graphPanel.Height));
                     }
-                    for (int y = 0; y < panel1.Height; y += 40)
+                    for (int y = 0; y < graphPanel.Height; y += 40)
                     {
-                        g.DrawLine(gridPen, new Point(0, y), new Point(panel1.Width, y));
+                        g.DrawLine(gridPen, new Point(0, y), new Point(graphPanel.Width, y));
                     }
                 }
             }

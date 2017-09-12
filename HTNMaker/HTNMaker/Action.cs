@@ -70,6 +70,13 @@ namespace HTNMaker
             get { return children.AsReadOnly(); }
         }
 
+        private List<Action> parents;
+
+        public IReadOnlyCollection<Action> Parents
+        {
+            get { return parents.AsReadOnly(); }
+        }
+
         private bool descendantsDirty;
 
         private HashSet<Action> descendants;
@@ -99,6 +106,7 @@ namespace HTNMaker
             conditions = new List<Statement>();
             effects = new List<Statement>();
             children = new List<Action>();
+            parents = new List<Action>();
             descendantsDirty = true;
             descendants = new HashSet<Action>();
         }
@@ -120,7 +128,8 @@ namespace HTNMaker
             } else
             {
                 children.Add(action);
-                descendantsDirty = true;
+                action.parents.Add(this);
+                flagDirtyDescendants();
                 return 0;
             }
 
@@ -128,8 +137,18 @@ namespace HTNMaker
         
         public void removeChild(Action action)
         {
-            descendantsDirty = true;
+            flagDirtyDescendants();
             children.Remove(action);
+            action.parents.Remove(this);
+        }
+
+        private void flagDirtyDescendants()
+        {
+            descendantsDirty = true;
+            foreach(Action parent in parents)
+            {
+                flagDirtyDescendants();
+            }
         }
 
         // TODO addCondition/effect, if already in list just change value

@@ -48,7 +48,7 @@
             this.CreateVariableButton = new System.Windows.Forms.Button();
             this.variablesList = new System.Windows.Forms.ListBox();
             this.variablesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.graphPanel = new System.Windows.Forms.Panel();
             this.editTabControl = new System.Windows.Forms.TabControl();
             this.ActionEditTab = new System.Windows.Forms.TabPage();
             this.RemoveChildButton = new System.Windows.Forms.Button();
@@ -120,20 +120,20 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.newToolStripMenuItem.Text = "&New";
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.loadToolStripMenuItem.Text = "&Load";
             // 
             // actionBindingSource
@@ -266,17 +266,17 @@
             this.variablesBindingSource.DataSource = typeof(HTNMaker.Variable);
             this.variablesBindingSource.CurrentChanged += new System.EventHandler(this.variablesBindingSource_CurrentChanged);
             // 
-            // panel1
+            // graphPanel
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.graphPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.AutoScroll = true;
-            this.panel1.Location = new System.Drawing.Point(202, 81);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(572, 827);
-            this.panel1.TabIndex = 5;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.graphPanel.AutoScroll = true;
+            this.graphPanel.Location = new System.Drawing.Point(202, 81);
+            this.graphPanel.Name = "graphPanel";
+            this.graphPanel.Size = new System.Drawing.Size(572, 827);
+            this.graphPanel.TabIndex = 5;
+            this.graphPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // editTabControl
             // 
@@ -600,7 +600,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1084, 910);
             this.Controls.Add(this.editTabControl);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.graphPanel);
             this.Controls.Add(this.elementTabControl);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -643,7 +643,6 @@
         private System.Windows.Forms.TabControl elementTabControl;
         private System.Windows.Forms.TabPage actionTab;
         private System.Windows.Forms.TabPage variablesTab;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ListBox actionListBox;
         private System.Windows.Forms.ListBox variablesList;
         private System.Windows.Forms.BindingSource variablesBindingSource;
@@ -683,6 +682,7 @@
         private System.Windows.Forms.BindingSource conditionBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn variableNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn valueDataGridViewCheckBoxColumn;
+        public System.Windows.Forms.Panel graphPanel;
     }
 }
 
