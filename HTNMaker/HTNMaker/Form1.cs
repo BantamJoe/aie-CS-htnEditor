@@ -32,13 +32,14 @@ namespace HTNMaker
 
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void graphPanel_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             Rectangle drawRect = new Rectangle(0, 0, graphPanel.Width, graphPanel.Height);
 
             using (Pen gridPen = new Pen(Color.Beige))
             {
+                //HACK try doublebuffering, or get rid of grid
                 gridPen.Width = 2;
                 using (Brush bgBrush = new SolidBrush(Color.Gray))
                 {
@@ -50,6 +51,18 @@ namespace HTNMaker
                     for (int y = 0; y < graphPanel.Height; y += 40)
                     {
                         g.DrawLine(gridPen, new Point(0, y), new Point(graphPanel.Width, y));
+                    }
+                }
+            }
+            using (Pen connectionPen = new Pen(Color.Black, 2))
+            {
+                foreach(Control control in graphPanel.Controls)
+                {
+                    NodeControl node = control as NodeControl;
+                    if(node != null)
+                    {
+                        //HACK maybe have tranparent panel above, draw onto that
+                        node.PaintConnections(g, connectionPen);
                     }
                 }
             }
@@ -523,6 +536,46 @@ namespace HTNMaker
         private void removeRootActionButton_Click(object sender, EventArgs e)
         {
             rootActionBindingSource.RemoveCurrent();
+        }
+
+        private void actionListBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            //HACK figure out how to allow selection by clicking but also drag and drop
+            //DoDragDrop((actionBindingSource.Current as Action), DragDropEffects.Link);
+        }
+
+        private void graphPanel_DragDrop(object sender, DragEventArgs e)
+        {
+            //TODO create nodecontrol for a dropped action
+            Action a = e.Data.GetData(typeof(Action)) as Action;
+            if(a != null)
+            {
+                NodeControl node = new NodeControl(a);
+                Controls.Add(node);
+                Point clientPoint = this.PointToClient(new Point(e.X, e.Y));
+                node.Location = clientPoint;
+            }
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            //HACK remove when drag and drop figured out
+            if (actionBindingSource.Current != null)
+            {
+                NodeControl node = new NodeControl(actionBindingSource.Current as Action);
+                graphPanel.Controls.Add(node);
+                node.Location = new Point(200, 50);     //TODO find open space to place node
+            }
+        }
+
+        private void graphPanel_ControlAdded(object sender, ControlEventArgs e)
+        {
+            graphPanel.Invalidate();
+        }
+
+        private void graphPanel_ControlRemoved(object sender, ControlEventArgs e)
+        {
+            graphPanel.Invalidate();
         }
     }
 }

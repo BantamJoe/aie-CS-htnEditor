@@ -186,6 +186,7 @@
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton1.Text = "toolStripButton1";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // newToolStripButton
             // 
@@ -320,6 +321,7 @@
             this.actionListBox.Name = "actionListBox";
             this.actionListBox.Size = new System.Drawing.Size(192, 290);
             this.actionListBox.TabIndex = 0;
+            this.actionListBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.actionListBox_MouseDown);
             // 
             // rootActionsTab
             // 
@@ -419,6 +421,7 @@
             // 
             // graphPanel
             // 
+            this.graphPanel.AllowDrop = true;
             this.graphPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -427,7 +430,10 @@
             this.graphPanel.Name = "graphPanel";
             this.graphPanel.Size = new System.Drawing.Size(572, 437);
             this.graphPanel.TabIndex = 5;
-            this.graphPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.graphPanel.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.graphPanel_ControlAdded);
+            this.graphPanel.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.graphPanel_ControlRemoved);
+            this.graphPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.graphPanel_DragDrop);
+            this.graphPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.graphPanel_Paint);
             // 
             // editTabControl
             // 
