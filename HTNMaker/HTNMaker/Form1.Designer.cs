@@ -38,6 +38,15 @@
             this.actionBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.newToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.cutToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.copyToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.elementTabControl = new System.Windows.Forms.TabControl();
             this.actionTab = new System.Windows.Forms.TabPage();
             this.DeleteActionButton = new System.Windows.Forms.Button();
@@ -80,6 +89,11 @@
             this.variableDescriptionLabel = new System.Windows.Forms.Label();
             this.variableNameTB = new System.Windows.Forms.TextBox();
             this.variableNameLabel = new System.Windows.Forms.Label();
+            this.rootActionsTab = new System.Windows.Forms.TabPage();
+            this.rootActionListBox = new System.Windows.Forms.ListBox();
+            this.addRootActionButton = new System.Windows.Forms.Button();
+            this.removeRootActionButton = new System.Windows.Forms.Button();
+            this.rootActionBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.actionBindingSource)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -95,6 +109,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.conditionBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.childActionBindingSource)).BeginInit();
             this.variableEditTab.SuspendLayout();
+            this.rootActionsTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.rootActionBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -122,6 +138,7 @@
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.newToolStripMenuItem.Text = "&New";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
@@ -145,7 +162,16 @@
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1});
+            this.toolStripButton1,
+            this.newToolStripButton,
+            this.openToolStripButton,
+            this.saveToolStripButton,
+            this.toolStripSeparator,
+            this.cutToolStripButton,
+            this.copyToolStripButton,
+            this.pasteToolStripButton,
+            this.toolStripSeparator1,
+            this.helpToolStripButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1084, 25);
@@ -161,16 +187,93 @@
             this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton1.Text = "toolStripButton1";
             // 
+            // newToolStripButton
+            // 
+            this.newToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.newToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripButton.Image")));
+            this.newToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.newToolStripButton.Name = "newToolStripButton";
+            this.newToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.newToolStripButton.Text = "&New";
+            this.newToolStripButton.Click += new System.EventHandler(this.newToolStripButton_Click);
+            // 
+            // openToolStripButton
+            // 
+            this.openToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.openToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripButton.Image")));
+            this.openToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openToolStripButton.Name = "openToolStripButton";
+            this.openToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.openToolStripButton.Text = "&Open";
+            this.openToolStripButton.Click += new System.EventHandler(this.openToolStripButton_Click);
+            // 
+            // saveToolStripButton
+            // 
+            this.saveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.saveToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripButton.Image")));
+            this.saveToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.saveToolStripButton.Name = "saveToolStripButton";
+            this.saveToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.saveToolStripButton.Text = "&Save";
+            this.saveToolStripButton.Click += new System.EventHandler(this.saveToolStripButton_Click);
+            // 
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(6, 25);
+            // 
+            // cutToolStripButton
+            // 
+            this.cutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.cutToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("cutToolStripButton.Image")));
+            this.cutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.cutToolStripButton.Name = "cutToolStripButton";
+            this.cutToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.cutToolStripButton.Text = "C&ut";
+            // 
+            // copyToolStripButton
+            // 
+            this.copyToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.copyToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("copyToolStripButton.Image")));
+            this.copyToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.copyToolStripButton.Name = "copyToolStripButton";
+            this.copyToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.copyToolStripButton.Text = "&Copy";
+            // 
+            // pasteToolStripButton
+            // 
+            this.pasteToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.pasteToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("pasteToolStripButton.Image")));
+            this.pasteToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.pasteToolStripButton.Name = "pasteToolStripButton";
+            this.pasteToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.pasteToolStripButton.Text = "&Paste";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // helpToolStripButton
+            // 
+            this.helpToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.helpToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("helpToolStripButton.Image")));
+            this.helpToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.helpToolStripButton.Name = "helpToolStripButton";
+            this.helpToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.helpToolStripButton.Text = "He&lp";
+            // 
             // elementTabControl
             // 
             this.elementTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.elementTabControl.Controls.Add(this.actionTab);
+            this.elementTabControl.Controls.Add(this.rootActionsTab);
             this.elementTabControl.Controls.Add(this.variablesTab);
             this.elementTabControl.Location = new System.Drawing.Point(0, 59);
             this.elementTabControl.Name = "elementTabControl";
             this.elementTabControl.SelectedIndex = 0;
-            this.elementTabControl.Size = new System.Drawing.Size(200, 849);
+            this.elementTabControl.Size = new System.Drawing.Size(200, 459);
             this.elementTabControl.TabIndex = 4;
             // 
             // actionTab
@@ -181,7 +284,7 @@
             this.actionTab.Location = new System.Drawing.Point(4, 22);
             this.actionTab.Name = "actionTab";
             this.actionTab.Padding = new System.Windows.Forms.Padding(3);
-            this.actionTab.Size = new System.Drawing.Size(192, 823);
+            this.actionTab.Size = new System.Drawing.Size(192, 433);
             this.actionTab.TabIndex = 0;
             this.actionTab.Text = "Actions";
             this.actionTab.UseVisualStyleBackColor = true;
@@ -226,7 +329,7 @@
             this.variablesTab.Location = new System.Drawing.Point(4, 22);
             this.variablesTab.Name = "variablesTab";
             this.variablesTab.Padding = new System.Windows.Forms.Padding(3);
-            this.variablesTab.Size = new System.Drawing.Size(192, 823);
+            this.variablesTab.Size = new System.Drawing.Size(192, 433);
             this.variablesTab.TabIndex = 1;
             this.variablesTab.Text = "Variables";
             this.variablesTab.UseVisualStyleBackColor = true;
@@ -275,7 +378,7 @@
             this.graphPanel.AutoScroll = true;
             this.graphPanel.Location = new System.Drawing.Point(202, 81);
             this.graphPanel.Name = "graphPanel";
-            this.graphPanel.Size = new System.Drawing.Size(572, 827);
+            this.graphPanel.Size = new System.Drawing.Size(572, 437);
             this.graphPanel.TabIndex = 5;
             this.graphPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -288,7 +391,7 @@
             this.editTabControl.Location = new System.Drawing.Point(776, 59);
             this.editTabControl.Name = "editTabControl";
             this.editTabControl.SelectedIndex = 0;
-            this.editTabControl.Size = new System.Drawing.Size(308, 849);
+            this.editTabControl.Size = new System.Drawing.Size(308, 459);
             this.editTabControl.TabIndex = 6;
             // 
             // ActionEditTab
@@ -314,7 +417,7 @@
             this.ActionEditTab.Location = new System.Drawing.Point(4, 22);
             this.ActionEditTab.Name = "ActionEditTab";
             this.ActionEditTab.Padding = new System.Windows.Forms.Padding(3);
-            this.ActionEditTab.Size = new System.Drawing.Size(300, 823);
+            this.ActionEditTab.Size = new System.Drawing.Size(300, 433);
             this.ActionEditTab.TabIndex = 0;
             this.ActionEditTab.Text = "Actions";
             this.ActionEditTab.UseVisualStyleBackColor = true;
@@ -554,7 +657,7 @@
             this.variableEditTab.Location = new System.Drawing.Point(4, 22);
             this.variableEditTab.Name = "variableEditTab";
             this.variableEditTab.Padding = new System.Windows.Forms.Padding(3);
-            this.variableEditTab.Size = new System.Drawing.Size(300, 823);
+            this.variableEditTab.Size = new System.Drawing.Size(300, 433);
             this.variableEditTab.TabIndex = 1;
             this.variableEditTab.Text = "Variables";
             this.variableEditTab.UseVisualStyleBackColor = true;
@@ -595,11 +698,58 @@
             this.variableNameLabel.TabIndex = 0;
             this.variableNameLabel.Text = "Name";
             // 
+            // rootActionsTab
+            // 
+            this.rootActionsTab.Controls.Add(this.removeRootActionButton);
+            this.rootActionsTab.Controls.Add(this.addRootActionButton);
+            this.rootActionsTab.Controls.Add(this.rootActionListBox);
+            this.rootActionsTab.Location = new System.Drawing.Point(4, 22);
+            this.rootActionsTab.Name = "rootActionsTab";
+            this.rootActionsTab.Padding = new System.Windows.Forms.Padding(3);
+            this.rootActionsTab.Size = new System.Drawing.Size(192, 433);
+            this.rootActionsTab.TabIndex = 2;
+            this.rootActionsTab.Text = "Root Actions";
+            this.rootActionsTab.UseVisualStyleBackColor = true;
+            // 
+            // rootActionListBox
+            // 
+            this.rootActionListBox.DataSource = this.rootActionBindingSource;
+            this.rootActionListBox.DisplayMember = "Name";
+            this.rootActionListBox.FormattingEnabled = true;
+            this.rootActionListBox.Location = new System.Drawing.Point(0, 0);
+            this.rootActionListBox.Name = "rootActionListBox";
+            this.rootActionListBox.Size = new System.Drawing.Size(192, 277);
+            this.rootActionListBox.TabIndex = 0;
+            // 
+            // addRootActionButton
+            // 
+            this.addRootActionButton.Location = new System.Drawing.Point(18, 305);
+            this.addRootActionButton.Name = "addRootActionButton";
+            this.addRootActionButton.Size = new System.Drawing.Size(75, 35);
+            this.addRootActionButton.TabIndex = 1;
+            this.addRootActionButton.Text = "Add Action";
+            this.addRootActionButton.UseVisualStyleBackColor = true;
+            this.addRootActionButton.Click += new System.EventHandler(this.addRootActionButton_Click);
+            // 
+            // removeRootActionButton
+            // 
+            this.removeRootActionButton.Location = new System.Drawing.Point(99, 305);
+            this.removeRootActionButton.Name = "removeRootActionButton";
+            this.removeRootActionButton.Size = new System.Drawing.Size(75, 35);
+            this.removeRootActionButton.TabIndex = 2;
+            this.removeRootActionButton.Text = "Remove Action";
+            this.removeRootActionButton.UseVisualStyleBackColor = true;
+            this.removeRootActionButton.Click += new System.EventHandler(this.removeRootActionButton_Click);
+            // 
+            // rootActionBindingSource
+            // 
+            this.rootActionBindingSource.DataSource = typeof(HTNMaker.Action);
+            // 
             // HTNEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1084, 910);
+            this.ClientSize = new System.Drawing.Size(1084, 520);
             this.Controls.Add(this.editTabControl);
             this.Controls.Add(this.graphPanel);
             this.Controls.Add(this.elementTabControl);
@@ -627,6 +777,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.childActionBindingSource)).EndInit();
             this.variableEditTab.ResumeLayout(false);
             this.variableEditTab.PerformLayout();
+            this.rootActionsTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.rootActionBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -684,6 +836,20 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn variableNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn valueDataGridViewCheckBoxColumn;
         public System.Windows.Forms.Panel graphPanel;
+        private System.Windows.Forms.ToolStripButton newToolStripButton;
+        private System.Windows.Forms.ToolStripButton openToolStripButton;
+        private System.Windows.Forms.ToolStripButton saveToolStripButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
+        private System.Windows.Forms.ToolStripButton cutToolStripButton;
+        private System.Windows.Forms.ToolStripButton copyToolStripButton;
+        private System.Windows.Forms.ToolStripButton pasteToolStripButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton helpToolStripButton;
+        private System.Windows.Forms.TabPage rootActionsTab;
+        private System.Windows.Forms.Button removeRootActionButton;
+        private System.Windows.Forms.Button addRootActionButton;
+        private System.Windows.Forms.ListBox rootActionListBox;
+        private System.Windows.Forms.BindingSource rootActionBindingSource;
     }
 }
 

@@ -36,7 +36,7 @@ namespace HTNMaker
                 variables = value;
             }
         }
-        private List<Action> TopLevelActions
+        public List<Action> TopLevelActions
         {
             get
             {
