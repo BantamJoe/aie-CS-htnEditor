@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<ModelDAO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Actions>
+    <ActionDTO>
+      <Name>Attack</Name>
+      <Description>Attack Target</Description>
+      <IsPrimitive>false</IsPrimitive>
+      <Conditions>
+        <StatementDTO>
+          <Variable>TargetIsDead</Variable>
+          <Value>false</Value>
+        </StatementDTO>
+      </Conditions>
+      <Effects>
+        <StatementDTO>
+          <Variable>TargetIsDead</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+      </Effects>
+      <Children>
+        <string>AttackWithWeapon</string>
+        <string>AttackMelee</string>
+        <string>Reload</string>
+      </Children>
+    </ActionDTO>
+    <ActionDTO>
+      <Name>AttackWithWeapon</Name>
+      <Description>Attack target with a weapon</Description>
+      <IsPrimitive>false</IsPrimitive>
+      <Conditions>
+        <StatementDTO>
+          <Variable>WeaponArmed</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+        <StatementDTO>
+          <Variable>WeaponLoaded</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+      </Conditions>
+      <Effects />
+      <Children>
+        <string>GetToCover</string>
+      </Children>
+    </ActionDTO>
+    <ActionDTO>
+      <Name>AttackMelee</Name>
+      <Description>Attack target with fists</Description>
+      <IsPrimitive>false</IsPrimitive>
+      <Conditions>
+        <StatementDTO>
+          <Variable>TargetIsDead</Variable>
+          <Value>false</Value>
+        </StatementDTO>
+      </Conditions>
+      <Effects>
+        <StatementDTO>
+          <Variable>TargetIsDead</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+      </Effects>
+      <Children />
+    </ActionDTO>
+    <ActionDTO>
+      <Name>Reload</Name>
+      <Description>Reload Weapon</Description>
+      <IsPrimitive>false</IsPrimitive>
+      <Conditions>
+        <StatementDTO>
+          <Variable>WeaponLoaded</Variable>
+          <Value>false</Value>
+        </StatementDTO>
+      </Conditions>
+      <Effects>
+        <StatementDTO>
+          <Variable>WeaponLoaded</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+      </Effects>
+      <Children />
+    </ActionDTO>
+    <ActionDTO>
+      <Name>ThrowGrenade</Name>
+      <Description />
+      <IsPrimitive>false</IsPrimitive>
+      <Conditions>
+        <StatementDTO>
+          <Variable>HasGrenade</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+      </Conditions>
+      <Effects>
+        <StatementDTO>
+          <Variable>TargetIsDead</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+      </Effects>
+      <Children>
+        <string>GetToCover</string>
+      </Children>
+    </ActionDTO>
+    <ActionDTO>
+      <Name>GetToCover</Name>
+      <Description />
+      <IsPrimitive>false</IsPrimitive>
+      <Conditions>
+        <StatementDTO>
+          <Variable>InCover</Variable>
+          <Value>false</Value>
+        </StatementDTO>
+      </Conditions>
+      <Effects>
+        <StatementDTO>
+          <Variable>InCover</Variable>
+          <Value>false</Value>
+        </StatementDTO>
+      </Effects>
+      <Children />
+    </ActionDTO>
+  </Actions>
+  <Variables>
+    <VariableDTO>
+      <Name>TargetIsDead</Name>
+      <Description>The agent's target has been killed</Description>
+    </VariableDTO>
+    <VariableDTO>
+      <Name>WeaponArmed</Name>
+      <Description>The agent is holding their weapon</Description>
+    </VariableDTO>
+    <VariableDTO>
+      <Name>WeaponLoaded</Name>
+      <Description>The agent's weapon is loaded</Description>
+    </VariableDTO>
+    <VariableDTO>
+      <Name>HasGrenade</Name>
+      <Description />
+    </VariableDTO>
+    <VariableDTO>
+      <Name>InCover</Name>
+      <Description />
+    </VariableDTO>
+  </Variables>
+  <TopLevelActions />
+</ModelDAO>

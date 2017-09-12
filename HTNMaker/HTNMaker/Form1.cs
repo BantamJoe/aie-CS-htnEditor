@@ -25,22 +25,22 @@ namespace HTNMaker
 
             model = new Model();
             //HACK for checking things are shown correctly
-            model.Variables.Add(new Variable("TargetIsDead", "The agent's target has been killed"));
-            model.Variables.Add(new Variable("WeaponArmed", "The agent is holding their weapon"));
-            model.Variables.Add(new Variable("WeaponLoaded", "The agent's weapon is loaded"));
-            model.Actions.Add(new Action("Attack", "Attack Target"));
-            model.Actions.Add(new Action("AttackWithWeapon", "Attack target with a weapon", true));
-            model.Actions.Add(new Action("AttackMelee", "Attack target with fists", true));
-            model.Actions.Add(new Action("Reload", "Reload Weapon", true));
-            model.Actions[0].addCondition(model.Variables[0], false);
-            model.Actions[1].addCondition(model.Variables[1], true);
-            model.Actions[1].addCondition(model.Variables[2], true);
-            model.Actions[3].addCondition(model.Variables[2], false);
-            model.Actions[3].addEffect(model.Variables[2], true);
-            model.Actions[0].addEffect(model.Variables[0], true);
-            model.Actions[0].addChild(model.Actions[1]);
-            model.Actions[0].addChild(model.Actions[2]);
-            model.Actions[0].addChild(model.Actions[3]);
+            //model.Variables.Add(new Variable("TargetIsDead", "The agent's target has been killed"));
+            //model.Variables.Add(new Variable("WeaponArmed", "The agent is holding their weapon"));
+            //model.Variables.Add(new Variable("WeaponLoaded", "The agent's weapon is loaded"));
+            //model.Actions.Add(new Action("Attack", "Attack Target"));
+            //model.Actions.Add(new Action("AttackWithWeapon", "Attack target with a weapon", true));
+            //model.Actions.Add(new Action("AttackMelee", "Attack target with fists", true));
+            //model.Actions.Add(new Action("Reload", "Reload Weapon", true));
+            //model.Actions[0].addCondition(model.Variables[0], false);
+            //model.Actions[1].addCondition(model.Variables[1], true);
+            //model.Actions[1].addCondition(model.Variables[2], true);
+            //model.Actions[3].addCondition(model.Variables[2], false);
+            //model.Actions[3].addEffect(model.Variables[2], true);
+            //model.Actions[0].addEffect(model.Variables[0], true);
+            //model.Actions[0].addChild(model.Actions[1]);
+            //model.Actions[0].addChild(model.Actions[2]);
+            //model.Actions[0].addChild(model.Actions[3]);
 
             actionBindingSource.DataSource = model.Actions;
             variablesBindingSource.DataSource = model.Variables;
