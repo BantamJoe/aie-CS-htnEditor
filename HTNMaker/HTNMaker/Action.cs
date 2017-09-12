@@ -147,7 +147,7 @@ namespace HTNMaker
             descendantsDirty = true;
             foreach(Action parent in parents)
             {
-                flagDirtyDescendants();
+                parent.flagDirtyDescendants();
             }
         }
 

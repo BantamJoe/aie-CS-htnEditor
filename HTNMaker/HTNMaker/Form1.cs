@@ -404,20 +404,26 @@ namespace HTNMaker
         {
             List<Action> possibleActions = new List<Action>();
             Action selectedAction = actionBindingSource.Current as Action;
-            //
-            possibleActions.AddRange(model.Actions.Where(a => (a != selectedAction) &&
-                                                                !(a as Action).Descendants.Any(d => d == selectedAction) &&
-                                                                !selectedAction.Descendants.Any(d => d == a)));
-            if (possibleActions.Count != 0)
+            if (!selectedAction.IsPrimitive)
             {
-                AddChildForm childForm = new AddChildForm(possibleActions);
-                childForm.ShowDialog();
-                if (childForm.DialogResult == DialogResult.OK)
+                //
+                possibleActions.AddRange(model.Actions.Where(a => (a != selectedAction) &&
+                                                                    !(a as Action).Descendants.Any(d => d == selectedAction) &&
+                                                                    !selectedAction.Descendants.Any(d => d == a)));
+                if (possibleActions.Count != 0)
                 {
-                    //TODO handle errors
-                    selectedAction.addChild(childForm.ChosenAction);
-                    childList.Refresh();
+                    AddChildForm childForm = new AddChildForm(possibleActions);
+                    childForm.ShowDialog();
+                    if (childForm.DialogResult == DialogResult.OK)
+                    {
+                        //TODO handle errors
+                        selectedAction.addChild(childForm.ChosenAction);
+                        childList.Refresh();
+                    }
                 }
+            } else
+            {
+                MessageBox.Show("Primitive actions cannot have children", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -460,8 +466,6 @@ namespace HTNMaker
             Stream fs = null;
             if(loadDialog.ShowDialog() == DialogResult.OK)
             {
-                actionBindingSource.DataSource = null;
-                variablesBindingSource.DataSource = null;
                 try
                 {
                     fs = loadDialog.OpenFile();

@@ -117,6 +117,7 @@ namespace HTNMaker
                         throw new InvalidDataException("Variable \"" + stateDTO.Variable + "\" used as effect of \"" + action.Name + "\" could not be found");
                     }
                 }
+                loadedActions.Add(action);
             }
             // set action children based on names in DTO 
             foreach (ActionDTO actDTO in dao.Actions)
