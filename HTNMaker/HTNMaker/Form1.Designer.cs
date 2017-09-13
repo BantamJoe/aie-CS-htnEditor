@@ -366,6 +366,7 @@
             this.rootActionListBox.Name = "rootActionListBox";
             this.rootActionListBox.Size = new System.Drawing.Size(192, 277);
             this.rootActionListBox.TabIndex = 0;
+            this.rootActionListBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.actionListBox_MouseDown);
             // 
             // rootActionBindingSource
             // 

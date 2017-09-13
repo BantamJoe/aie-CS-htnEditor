@@ -517,7 +517,11 @@ namespace HTNMaker
         private void actionListBox_MouseDown(object sender, MouseEventArgs e)
         {
             //HACK figure out how to allow selection by clicking but also drag and drop
-            //DoDragDrop((actionBindingSource.Current as Action), DragDropEffects.Link);
+            if((Keys.Control & Control.ModifierKeys) != 0)
+            {
+                DoDragDrop((actionBindingSource.Current as Action).Name, DragDropEffects.Copy);
+            }
+            
         }
 
         private void graphPanel_DragDrop(object sender, DragEventArgs e)
@@ -540,6 +544,14 @@ namespace HTNMaker
                         MessageBox.Show("Error: " + ex.Message);
                     }
                     bindDataSources();
+                }
+            } else if (e.Data.GetDataPresent(DataFormats.StringFormat))
+            {
+                string name = e.Data.GetData(DataFormats.StringFormat) as string;
+                Action selectedAction = model.Actions.Find(a => a.Name == name);
+                if(selectedAction != null)
+                {
+                    placeNewNode(selectedAction, graphPanel.PointToClient(new Point(e.X, e.Y)), false);
                 }
             }
             //TODO create nodecontrol for a dropped action
@@ -581,12 +593,15 @@ namespace HTNMaker
             }
         }
 
-        public void placeNewNode(Action action, Point location)
+        public void placeNewNode(Action action, Point location, bool findSpace = true)
         {
             NodeControl node = new NodeControl(action);
             graphPanel.Controls.Add(node);
             node.Location = location;
-            node.findOpenSpace();
+            if (findSpace)
+            {
+                node.findOpenSpace();
+            }
         }
 
         private void graphPanel_DragEnter(object sender, DragEventArgs e)
@@ -603,6 +618,13 @@ namespace HTNMaker
                     {
                         e.Effect = DragDropEffects.Copy;
                     }
+                }
+            } else if (e.Data.GetDataPresent(DataFormats.StringFormat))
+            {
+                string data = e.Data.GetData(DataFormats.StringFormat) as string;
+                if(model.Actions.Exists(a=>a.Name == data))
+                {
+                    e.Effect = DragDropEffects.Copy;
                 }
             }
         }

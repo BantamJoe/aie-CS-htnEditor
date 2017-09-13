@@ -7,9 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections.Specialized;
 
 namespace HTNMaker
 {
+    //TODO add condition and effect panels, hidden unless dragging variable over
+    // On dropping into appropriate panel, variable is added to list of conditions/effects
     public partial class NodeControl : UserControl
     {
         public static int NODE_WIDTH = 150;
@@ -41,12 +44,11 @@ namespace HTNMaker
             }
             ObservedAction = action;
             titleLabel.DataBindings.Add(new Binding("Text", ObservedAction, "Name"));
-            
         }
 
         private void NodeControl_Paint(object sender, PaintEventArgs e)
         {
-            //TODO draw lines to any child nodes
+            //TODO get rid of this delegate
            
         }
 
@@ -67,7 +69,11 @@ namespace HTNMaker
             open = !open;
             if (open)
             {
-                foreach(Action childAction in ObservedAction.Children)
+                //TODO unsubscribe, then subscribe, here
+                (ObservedAction.Children as INotifyCollectionChanged).CollectionChanged -= ActionChildrenChanged;
+                (ObservedAction.Children as INotifyCollectionChanged).CollectionChanged += ActionChildrenChanged;
+
+                foreach (Action childAction in ObservedAction.Children)
                 {
                     NodeControl childNode = new NodeControl(childAction, this);
                     Parent.Controls.Add(childNode);
@@ -118,7 +124,8 @@ namespace HTNMaker
 
         private void closeChildren()
         {
-            foreach(NodeControl child in childNodes)
+            (ObservedAction.Children as INotifyCollectionChanged).CollectionChanged -= ActionChildrenChanged;
+            foreach (NodeControl child in childNodes)
             {
                 child.closeChildren();
                 child.Parent.Controls.Remove(child);
@@ -161,6 +168,36 @@ namespace HTNMaker
                 }
             }
             Location = potentialLocation;
+        }
+
+        void ActionChildrenChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            //TODO were children added or removed? If removed, close child, and remove it from parent and own child list
+            // If added, create new node and add to list/parent
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    foreach(Action addedAction in e.NewItems)
+                    {
+                        NodeControl childNode = new NodeControl(addedAction, this);
+                        Parent.Controls.Add(childNode);
+                        childNodes.Add(childNode);
+                        childNode.Location = new Point(Location.X, Location.Y + NODE_VERTICAL_SPACING);
+                        childNode.findOpenSpace();
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    //TODO get all nodes observing removed actions
+                    //TODO close each node, remove from parent, remove from children
+
+                    //List<Action> removedActions = e.OldItems;
+                    //removedActions.AddRange(e.OldItems.);
+                    //List<NodeControl> removedNodes = new List<NodeControl>();
+                    //removedNodes.AddRange(childNodes.Where(n => ))
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
