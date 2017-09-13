@@ -62,7 +62,7 @@
             this.CreateVariableButton = new System.Windows.Forms.Button();
             this.variablesList = new System.Windows.Forms.ListBox();
             this.variablesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.graphPanel = new DoubleBufferedPanel();
+            this.graphPanel = new HTNMaker.DoubleBufferedPanel();
             this.editTabControl = new System.Windows.Forms.TabControl();
             this.ActionEditTab = new System.Windows.Forms.TabPage();
             this.RemoveChildButton = new System.Windows.Forms.Button();
@@ -435,7 +435,6 @@
             this.graphPanel.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.graphPanel_ControlRemoved);
             this.graphPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.graphPanel_DragDrop);
             this.graphPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.graphPanel_DragEnter);
-            this.graphPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.graphPanel_Paint);
             // 
             // editTabControl
             // 
@@ -843,7 +842,6 @@
         private System.Windows.Forms.BindingSource conditionBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn variableNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn valueDataGridViewCheckBoxColumn;
-        public System.Windows.Forms.Panel graphPanel;
         private System.Windows.Forms.ToolStripButton newToolStripButton;
         private System.Windows.Forms.ToolStripButton openToolStripButton;
         private System.Windows.Forms.ToolStripButton saveToolStripButton;
@@ -858,6 +856,7 @@
         private System.Windows.Forms.Button addRootActionButton;
         private System.Windows.Forms.ListBox rootActionListBox;
         private System.Windows.Forms.BindingSource rootActionBindingSource;
+        public DoubleBufferedPanel graphPanel;
     }
 }
 
