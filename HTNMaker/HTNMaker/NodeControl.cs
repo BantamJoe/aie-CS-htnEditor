@@ -29,6 +29,7 @@ namespace HTNMaker
         public NodeControl(Action action, NodeControl parentNode = null)
         {
             InitializeComponent();
+            DoubleBuffered = true;
             Width = NODE_WIDTH;
             Height = NODE_HEIGHT;
             open = false;

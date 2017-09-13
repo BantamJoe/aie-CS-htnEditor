@@ -62,7 +62,7 @@
             this.CreateVariableButton = new System.Windows.Forms.Button();
             this.variablesList = new System.Windows.Forms.ListBox();
             this.variablesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.graphPanel = new System.Windows.Forms.Panel();
+            this.graphPanel = new DoubleBufferedPanel();
             this.editTabControl = new System.Windows.Forms.TabControl();
             this.ActionEditTab = new System.Windows.Forms.TabPage();
             this.RemoveChildButton = new System.Windows.Forms.Button();
