@@ -12,6 +12,8 @@ namespace HTNMaker
 {
     public partial class NodeControl : UserControl
     {
+        public static int NODE_WIDTH = 150;
+        public static int NODE_HEIGHT = 80;
         public static int NODE_VERTICAL_SPACING = 100;
         public static int NODE_HORIZONTAL_SPACING = 200;
         public Action ObservedAction {get; set;}
@@ -27,6 +29,8 @@ namespace HTNMaker
         public NodeControl(Action action, NodeControl parentNode = null)
         {
             InitializeComponent();
+            Width = NODE_WIDTH;
+            Height = NODE_HEIGHT;
             open = false;
             childNodes = new List<NodeControl>();
             this.parentNode = parentNode;
@@ -74,7 +78,10 @@ namespace HTNMaker
                 foreach(NodeControl childNode in childNodes)
                 {
                     childNode.Location = new Point(xLocation, rowLocation);
+                    childNode.findOpenSpace();
                     xLocation += NODE_HORIZONTAL_SPACING;
+                    //rowLocation = childNode.Location.Y;
+                    //xLocation = childNode.Location.X + NODE_HORIZONTAL_SPACING;
                 }
                 
             } else
@@ -117,6 +124,43 @@ namespace HTNMaker
                 child.Parent.Controls.Remove(child);
             }
             childNodes.Clear();
+        }
+
+        // Move the NodeControl so it's not overlapping any others
+        public void findOpenSpace()
+        {
+            IEnumerable<NodeControl> otherControls = Parent.Controls.OfType<NodeControl>().Where(n => n != this);
+            Point potentialLocation = new Point(this.Location.X, this.Location.Y);
+            bool findingSpace = true;
+            while (findingSpace)
+            {
+                bool noCollision = true;
+                foreach(NodeControl node in otherControls)
+                {
+                    int xSpace = Math.Abs(potentialLocation.X - node.Location.X);
+                    int ySpace = Math.Abs(potentialLocation.Y - node.Location.Y);
+                    if(xSpace < NODE_HORIZONTAL_SPACING || ySpace < NODE_VERTICAL_SPACING)
+                    {
+                        noCollision = false;
+                        break;
+                    }
+                }
+                if (noCollision)
+                {
+                    findingSpace = false;
+                } else
+                {
+                    if(potentialLocation.X > Parent.Width)
+                    {
+                        potentialLocation.X = 0;
+                        potentialLocation.Y += NODE_VERTICAL_SPACING;
+                    } else
+                    {
+                        potentialLocation.X += NODE_HORIZONTAL_SPACING;
+                    }
+                }
+            }
+            Location = potentialLocation;
         }
     }
 }

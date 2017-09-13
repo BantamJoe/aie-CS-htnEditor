@@ -22,6 +22,7 @@ namespace HTNMaker
         public HTNEditorForm()
         {
             InitializeComponent();
+            
 
             makeBlankHTN();
 
@@ -436,7 +437,7 @@ namespace HTNMaker
         {
             model = new Model();
             bindDataSources();
-            //TODO remove nodes from graph
+            clearNodeControls();
         }
 
         private void save()
@@ -486,6 +487,7 @@ namespace HTNMaker
                         {
                             model.Load(fs);
                         }
+                        clearNodeControls();
                     }
                 }
                 catch (Exception ex)
@@ -495,7 +497,6 @@ namespace HTNMaker
 
                 bindDataSources();
             }
-            //TODO remove nodes from graph
         }
 
         private void bindDataSources()
@@ -530,12 +531,22 @@ namespace HTNMaker
 
         private void addRootActionButton_Click(object sender, EventArgs e)
         {
-            //TODO create modal dialog which allows valid non-root action to be selected
+            //TODO maybe root actions shouldn't have parents and vice versa?
+            List<Action> possibleActions = new List<Action>();
+            possibleActions.AddRange(model.Actions.Except(model.TopLevelActions));
+            AddRootForm rootForm = new AddRootForm(possibleActions);
+            if(rootForm.ShowDialog() == DialogResult.OK)
+            {
+                rootActionBindingSource.Add(rootForm.ChosenAction);
+            }
         }
 
         private void removeRootActionButton_Click(object sender, EventArgs e)
         {
-            rootActionBindingSource.RemoveCurrent();
+            if (rootActionBindingSource.Current != null)
+            {
+                rootActionBindingSource.RemoveCurrent();
+            }
         }
 
         private void actionListBox_MouseDown(object sender, MouseEventArgs e)
@@ -576,6 +587,16 @@ namespace HTNMaker
         private void graphPanel_ControlRemoved(object sender, ControlEventArgs e)
         {
             graphPanel.Invalidate();
+        }
+
+        private void clearNodeControls()
+        {
+            List<NodeControl> nodes = new List<NodeControl>();
+            nodes.AddRange(graphPanel.Controls.OfType<NodeControl>());
+            foreach(NodeControl node in nodes)
+            {
+                graphPanel.Controls.Remove(node);
+            }
         }
     }
 }
