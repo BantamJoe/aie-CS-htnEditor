@@ -79,9 +79,8 @@ namespace HTNMaker
                 {
                     childNode.Location = new Point(xLocation, rowLocation);
                     childNode.findOpenSpace();
-                    xLocation += NODE_HORIZONTAL_SPACING;
-                    //rowLocation = childNode.Location.Y;
-                    //xLocation = childNode.Location.X + NODE_HORIZONTAL_SPACING;
+                    rowLocation = childNode.Location.Y;
+                    xLocation = childNode.Location.X + NODE_HORIZONTAL_SPACING;
                 }
                 
             } else
@@ -139,7 +138,7 @@ namespace HTNMaker
                 {
                     int xSpace = Math.Abs(potentialLocation.X - node.Location.X);
                     int ySpace = Math.Abs(potentialLocation.Y - node.Location.Y);
-                    if(xSpace < NODE_HORIZONTAL_SPACING || ySpace < NODE_VERTICAL_SPACING)
+                    if(xSpace < NODE_WIDTH && ySpace < NODE_HEIGHT)
                     {
                         noCollision = false;
                         break;
@@ -150,13 +149,13 @@ namespace HTNMaker
                     findingSpace = false;
                 } else
                 {
-                    if(potentialLocation.X > Parent.Width)
+                    if(potentialLocation.X + NODE_WIDTH > Parent.Width)
                     {
                         potentialLocation.X = 0;
                         potentialLocation.Y += NODE_VERTICAL_SPACING;
                     } else
                     {
-                        potentialLocation.X += NODE_HORIZONTAL_SPACING;
+                        potentialLocation.X += NODE_HORIZONTAL_SPACING/2;
                     }
                 }
             }

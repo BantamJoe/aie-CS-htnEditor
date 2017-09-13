@@ -21,6 +21,7 @@
         <string>AttackWithWeapon</string>
         <string>AttackMelee</string>
         <string>Reload</string>
+        <string>ThrowGrenade</string>
       </Children>
     </ActionDTO>
     <ActionDTO>

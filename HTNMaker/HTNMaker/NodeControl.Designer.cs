@@ -41,7 +41,7 @@
             this.titleLabel.ForeColor = System.Drawing.Color.Black;
             this.titleLabel.Location = new System.Drawing.Point(0, 0);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(150, 82);
+            this.titleLabel.Size = new System.Drawing.Size(148, 80);
             this.titleLabel.TabIndex = 0;
             this.titleLabel.Text = "label1";
             this.titleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -61,10 +61,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.titleLabel);
             this.Name = "NodeControl";
-            this.Size = new System.Drawing.Size(150, 82);
+            this.Size = new System.Drawing.Size(148, 80);
             this.DoubleClick += new System.EventHandler(this.NodeControl_DoubleClick);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NodeControl_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.NodeControl_MouseMove);

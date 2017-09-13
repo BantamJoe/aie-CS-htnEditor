@@ -573,9 +573,11 @@ namespace HTNMaker
             //HACK remove when drag and drop figured out
             if (actionBindingSource.Current != null)
             {
+                //TODO extract out to a PlaceNewNode function which can be called from various places
                 NodeControl node = new NodeControl(actionBindingSource.Current as Action);
                 graphPanel.Controls.Add(node);
                 node.Location = new Point(200, 50);     //TODO find open space to place node
+                node.findOpenSpace();
             }
         }
 
