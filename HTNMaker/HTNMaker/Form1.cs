@@ -557,27 +557,42 @@ namespace HTNMaker
 
         private void graphPanel_DragDrop(object sender, DragEventArgs e)
         {
-            //TODO create nodecontrol for a dropped action
-            Action a = e.Data.GetData(typeof(Action)) as Action;
-            if(a != null)
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
-                NodeControl node = new NodeControl(a);
-                Controls.Add(node);
-                Point clientPoint = this.PointToClient(new Point(e.X, e.Y));
-                node.Location = clientPoint;
+                string[] filepaths = e.Data.GetData(DataFormats.FileDrop) as string[];
+                foreach(string filepath in filepaths)
+                {
+                    try
+                    {
+                        StreamReader fs = new StreamReader(filepath);
+                        using (fs)
+                        {
+                            model.Load(fs.BaseStream);
+                            clearNodeControls();
+                        }
+                    } catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message);
+                    }
+                    bindDataSources();
+                }
             }
+            //TODO create nodecontrol for a dropped action
+            //Action a = e.Data.GetData(typeof(Action)) as Action;
+            //if(a != null)
+            //{
+            //    NodeControl node = new NodeControl(a);
+            //    Controls.Add(node);
+            //    Point clientPoint = this.PointToClient(new Point(e.X, e.Y));
+            //    node.Location = clientPoint;
+            //}
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            //HACK remove when drag and drop figured out
             if (actionBindingSource.Current != null)
             {
-                //TODO extract out to a PlaceNewNode function which can be called from various places
-                NodeControl node = new NodeControl(actionBindingSource.Current as Action);
-                graphPanel.Controls.Add(node);
-                node.Location = new Point(200, 50);     //TODO find open space to place node
-                node.findOpenSpace();
+                placeNewNode(actionBindingSource.Current as Action, new Point(200,50));
             }
         }
 
@@ -598,6 +613,32 @@ namespace HTNMaker
             foreach(NodeControl node in nodes)
             {
                 graphPanel.Controls.Remove(node);
+            }
+        }
+
+        public void placeNewNode(Action action, Point location)
+        {
+            NodeControl node = new NodeControl(action);
+            graphPanel.Controls.Add(node);
+            node.Location = location;
+            node.findOpenSpace();
+        }
+
+        private void graphPanel_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                foreach (string filename in e.Data.GetData(DataFormats.FileDrop) as string[])
+                {
+                    if (System.IO.Path.GetExtension(filename) != ".xml")
+                    {
+                        e.Effect = DragDropEffects.None;
+                    }
+                    else
+                    {
+                        e.Effect = DragDropEffects.Copy;
+                    }
+                }
             }
         }
     }
