@@ -1,0 +1,443 @@
+<?xml version="1.0"?>
+<ModelDAO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Actions>
+    <ActionDTO>
+      <Name>MoveToCover</Name>
+      <Description>Move into cover</Description>
+      <IsPrimitive>false</IsPrimitive>
+      <Conditions />
+      <Effects>
+        <StatementDTO>
+          <Variable>InCover</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+      </Effects>
+      <Children />
+    </ActionDTO>
+    <ActionDTO>
+      <Name>AttackMelee</Name>
+      <Description />
+      <IsPrimitive>false</IsPrimitive>
+      <Conditions>
+        <StatementDTO>
+          <Variable>NearTarget</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+        <StatementDTO>
+          <Variable>TargetIsDead</Variable>
+          <Value>false</Value>
+        </StatementDTO>
+      </Conditions>
+      <Effects>
+        <StatementDTO>
+          <Variable>TargetIsDead</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+      </Effects>
+      <Children />
+    </ActionDTO>
+    <ActionDTO>
+      <Name>AttackRanged</Name>
+      <Description>Attack target with ranged weapon</Description>
+      <IsPrimitive>false</IsPrimitive>
+      <Conditions>
+        <StatementDTO>
+          <Variable>WeaponReady</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+        <StatementDTO>
+          <Variable>WeaponLoaded</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+        <StatementDTO>
+          <Variable>HasWeapon</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+        <StatementDTO>
+          <Variable>TargetInCover</Variable>
+          <Value>false</Value>
+        </StatementDTO>
+        <StatementDTO>
+          <Variable>TargetIsDead</Variable>
+          <Value>false</Value>
+        </StatementDTO>
+      </Conditions>
+      <Effects>
+        <StatementDTO>
+          <Variable>TargetIsDead</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+      </Effects>
+      <Children />
+    </ActionDTO>
+    <ActionDTO>
+      <Name>AttackGrenade</Name>
+      <Description>Attack target with grenades</Description>
+      <IsPrimitive>false</IsPrimitive>
+      <Conditions>
+        <StatementDTO>
+          <Variable>HasGrenade</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+        <StatementDTO>
+          <Variable>TargetInCover</Variable>
+          <Value>false</Value>
+        </StatementDTO>
+        <StatementDTO>
+          <Variable>TargetIsDead</Variable>
+          <Value>false</Value>
+        </StatementDTO>
+      </Conditions>
+      <Effects>
+        <StatementDTO>
+          <Variable>TargetIsDead</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+      </Effects>
+      <Children />
+    </ActionDTO>
+    <ActionDTO>
+      <Name>FlushOutWithGrenade</Name>
+      <Description>Throw grenades to flush target out of cover</Description>
+      <IsPrimitive>false</IsPrimitive>
+      <Conditions>
+        <StatementDTO>
+          <Variable>HasGrenade</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+        <StatementDTO>
+          <Variable>TargetInCover</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+      </Conditions>
+      <Effects>
+        <StatementDTO>
+          <Variable>TargetInCover</Variable>
+          <Value>false</Value>
+        </StatementDTO>
+      </Effects>
+      <Children />
+    </ActionDTO>
+    <ActionDTO>
+      <Name>AttackFromCover</Name>
+      <Description>Shoot at target from behind cover</Description>
+      <IsPrimitive>false</IsPrimitive>
+      <Conditions>
+        <StatementDTO>
+          <Variable>InCover</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+        <StatementDTO>
+          <Variable>WeaponReady</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+        <StatementDTO>
+          <Variable>WeaponLoaded</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+        <StatementDTO>
+          <Variable>HasWeapon</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+        <StatementDTO>
+          <Variable>TargetIsDead</Variable>
+          <Value>false</Value>
+        </StatementDTO>
+      </Conditions>
+      <Effects>
+        <StatementDTO>
+          <Variable>TargetIsDead</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+      </Effects>
+      <Children />
+    </ActionDTO>
+    <ActionDTO>
+      <Name>Charge</Name>
+      <Description>Charge into close range with target</Description>
+      <IsPrimitive>false</IsPrimitive>
+      <Conditions />
+      <Effects>
+        <StatementDTO>
+          <Variable>TargetInCover</Variable>
+          <Value>false</Value>
+        </StatementDTO>
+        <StatementDTO>
+          <Variable>NearTarget</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+      </Effects>
+      <Children />
+    </ActionDTO>
+    <ActionDTO>
+      <Name>Flank</Name>
+      <Description>Move around target to negate their cover</Description>
+      <IsPrimitive>false</IsPrimitive>
+      <Conditions>
+        <StatementDTO>
+          <Variable>TargetInCover</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+      </Conditions>
+      <Effects>
+        <StatementDTO>
+          <Variable>TargetInCover</Variable>
+          <Value>false</Value>
+        </StatementDTO>
+      </Effects>
+      <Children />
+    </ActionDTO>
+    <ActionDTO>
+      <Name>ReadyWeapon</Name>
+      <Description />
+      <IsPrimitive>false</IsPrimitive>
+      <Conditions>
+        <StatementDTO>
+          <Variable>HasWeapon</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+        <StatementDTO>
+          <Variable>WeaponReady</Variable>
+          <Value>false</Value>
+        </StatementDTO>
+      </Conditions>
+      <Effects>
+        <StatementDTO>
+          <Variable>WeaponReady</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+      </Effects>
+      <Children />
+    </ActionDTO>
+    <ActionDTO>
+      <Name>Reload</Name>
+      <Description />
+      <IsPrimitive>false</IsPrimitive>
+      <Conditions>
+        <StatementDTO>
+          <Variable>HasWeapon</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+        <StatementDTO>
+          <Variable>WeaponLoaded</Variable>
+          <Value>false</Value>
+        </StatementDTO>
+      </Conditions>
+      <Effects>
+        <StatementDTO>
+          <Variable>WeaponLoaded</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+      </Effects>
+      <Children />
+    </ActionDTO>
+    <ActionDTO>
+      <Name>KillTarget</Name>
+      <Description />
+      <IsPrimitive>false</IsPrimitive>
+      <Conditions>
+        <StatementDTO>
+          <Variable>TargetIsDead</Variable>
+          <Value>false</Value>
+        </StatementDTO>
+        <StatementDTO>
+          <Variable>HasWeapon</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+        <StatementDTO>
+          <Variable>HasAmmo</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+        <StatementDTO>
+          <Variable>HealthOK</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+      </Conditions>
+      <Effects>
+        <StatementDTO>
+          <Variable>TargetIsDead</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+      </Effects>
+      <Children>
+        <string>AttackMelee</string>
+        <string>MoveToCover</string>
+        <string>AttackRanged</string>
+        <string>AttackGrenade</string>
+        <string>AttackFromCover</string>
+        <string>Charge</string>
+        <string>ReadyWeapon</string>
+        <string>Reload</string>
+        <string>BreakTargetCover</string>
+      </Children>
+    </ActionDTO>
+    <ActionDTO>
+      <Name>BreakTargetCover</Name>
+      <Description />
+      <IsPrimitive>false</IsPrimitive>
+      <Conditions>
+        <StatementDTO>
+          <Variable>TargetInCover</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+      </Conditions>
+      <Effects>
+        <StatementDTO>
+          <Variable>TargetInCover</Variable>
+          <Value>false</Value>
+        </StatementDTO>
+      </Effects>
+      <Children>
+        <string>FlushOutWithGrenade</string>
+        <string>Charge</string>
+        <string>Flank</string>
+      </Children>
+    </ActionDTO>
+    <ActionDTO>
+      <Name>GatherResources</Name>
+      <Description />
+      <IsPrimitive>false</IsPrimitive>
+      <Conditions />
+      <Effects>
+        <StatementDTO>
+          <Variable>HasWeapon</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+        <StatementDTO>
+          <Variable>HasAmmo</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+        <StatementDTO>
+          <Variable>HealthOK</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+      </Effects>
+      <Children>
+        <string>FindAmmo</string>
+        <string>FindHealthpack</string>
+        <string>FindWeapon</string>
+        <string>FindGrenades</string>
+        <string>ReturnToSpawn</string>
+      </Children>
+    </ActionDTO>
+    <ActionDTO>
+      <Name>FindAmmo</Name>
+      <Description />
+      <IsPrimitive>true</IsPrimitive>
+      <Conditions />
+      <Effects>
+        <StatementDTO>
+          <Variable>HasAmmo</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+      </Effects>
+      <Children />
+    </ActionDTO>
+    <ActionDTO>
+      <Name>FindWeapon</Name>
+      <Description />
+      <IsPrimitive>true</IsPrimitive>
+      <Conditions />
+      <Effects>
+        <StatementDTO>
+          <Variable>HasWeapon</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+      </Effects>
+      <Children />
+    </ActionDTO>
+    <ActionDTO>
+      <Name>FindHealthpack</Name>
+      <Description />
+      <IsPrimitive>true</IsPrimitive>
+      <Conditions />
+      <Effects>
+        <StatementDTO>
+          <Variable>HealthOK</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+      </Effects>
+      <Children />
+    </ActionDTO>
+    <ActionDTO>
+      <Name>FindGrenades</Name>
+      <Description />
+      <IsPrimitive>true</IsPrimitive>
+      <Conditions />
+      <Effects>
+        <StatementDTO>
+          <Variable>HasGrenade</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+      </Effects>
+      <Children />
+    </ActionDTO>
+    <ActionDTO>
+      <Name>ReturnToSpawn</Name>
+      <Description />
+      <IsPrimitive>true</IsPrimitive>
+      <Conditions />
+      <Effects>
+        <StatementDTO>
+          <Variable>HasAmmo</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+        <StatementDTO>
+          <Variable>HealthOK</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+        <StatementDTO>
+          <Variable>HasWeapon</Variable>
+          <Value>true</Value>
+        </StatementDTO>
+      </Effects>
+      <Children />
+    </ActionDTO>
+  </Actions>
+  <Variables>
+    <VariableDTO>
+      <Name>TargetIsDead</Name>
+      <Description>Agent's target has been killed</Description>
+    </VariableDTO>
+    <VariableDTO>
+      <Name>TargetInCover</Name>
+      <Description>Target is behind cover</Description>
+    </VariableDTO>
+    <VariableDTO>
+      <Name>WeaponReady</Name>
+      <Description>Agent is holding weapon</Description>
+    </VariableDTO>
+    <VariableDTO>
+      <Name>WeaponLoaded</Name>
+      <Description>Agent's weapon has ammunition</Description>
+    </VariableDTO>
+    <VariableDTO>
+      <Name>HasGrenade</Name>
+      <Description>Agent has grenades</Description>
+    </VariableDTO>
+    <VariableDTO>
+      <Name>HasWeapon</Name>
+      <Description>Agent has a weapon</Description>
+    </VariableDTO>
+    <VariableDTO>
+      <Name>NearTarget</Name>
+      <Description />
+    </VariableDTO>
+    <VariableDTO>
+      <Name>InCover</Name>
+      <Description>Agent is in cover from target</Description>
+    </VariableDTO>
+    <VariableDTO>
+      <Name>HasAmmo</Name>
+      <Description />
+    </VariableDTO>
+    <VariableDTO>
+      <Name>HealthOK</Name>
+      <Description />
+    </VariableDTO>
+  </Variables>
+  <TopLevelActions>
+    <string>KillTarget</string>
+    <string>GatherResources</string>
+  </TopLevelActions>
+</ModelDAO>

@@ -12,8 +12,7 @@ namespace HTNMaker
         private List<Action> actions;
         private List<Variable> variables;
         private List<Action> topLevelActions;
-
-        //TODO fields
+        
         public List<Action> Actions
         {
             get

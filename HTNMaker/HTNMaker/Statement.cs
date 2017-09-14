@@ -8,14 +8,12 @@ namespace HTNMaker
 {
     public class Statement
     {
-        // TODO write getter/setters, decide if read only, etc
         public Variable Variable { get; set; }
         public string VariableName { get { return Variable.Name; } }
         public bool Value { get; set; }
 
         public Statement(Variable variable, bool value)
         {
-            //TODO maybe use private members instead?
             this.Variable = variable;
             this.Value = value;
         }

@@ -169,6 +169,7 @@ namespace HTNMaker
         {
             Action action = new Action(MakeUniqueActionName());
             actionBindingSource.Add(action);
+            actionBindingSource.MoveLast();
         }
 
         public string MakeUniqueActionName()
@@ -236,6 +237,7 @@ namespace HTNMaker
         {
             Variable newVariable = new Variable(MakeUniqueVariableName());
             variablesBindingSource.Add(newVariable);
+            variablesBindingSource.MoveLast();
         }
 
         private void DeleteActionButton_Click(object sender, EventArgs e)
@@ -504,7 +506,6 @@ namespace HTNMaker
 
         private void addRootActionButton_Click(object sender, EventArgs e)
         {
-            //TODO maybe root actions shouldn't have parents and vice versa?
             List<Action> possibleActions = new List<Action>();
             possibleActions.AddRange(model.Actions.Except(model.TopLevelActions));
             AddRootForm rootForm = new AddRootForm(possibleActions);

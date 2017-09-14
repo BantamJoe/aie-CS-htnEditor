@@ -188,8 +188,7 @@ namespace HTNMaker
         {
             effects.RemoveAll(effect => effect.Variable == variable);
         }
-
-        //TODO createDTO
+        
         public ActionDTO CreateDTO()
         {
             ActionDTO dto = new ActionDTO();

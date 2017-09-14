@@ -20,6 +20,7 @@ namespace HTNMaker
         public static int NODE_HEIGHT = 80;
         public static int NODE_VERTICAL_SPACING = 100;
         public static int NODE_HORIZONTAL_SPACING = 200;
+        public static int NODE_MAX_X = 1000;
         public Action ObservedAction {get; set;}
 
         private NodeControl parentNode;
@@ -59,12 +60,10 @@ namespace HTNMaker
 
         private void NodeControl_DoubleClick(object sender, EventArgs e)
         {
-            //TODO open or close
-            // TODO on opening, create children and add to parent as controls
             open = !open;
             if (open)
             {
-                // Unsubscribe first, to ensure it's not added twice
+                // Unsubscribe first, to ensure it's not subscribed twice
                 (ObservedAction.Children as INotifyCollectionChanged).CollectionChanged -= ActionChildrenChanged;
                 (ObservedAction.Children as INotifyCollectionChanged).CollectionChanged += ActionChildrenChanged;
 
@@ -146,19 +145,17 @@ namespace HTNMaker
                         break;
                     }
                 }
-                if (noCollision)
+                if (potentialLocation.X + NODE_WIDTH > Parent.Width)
+                {
+                    potentialLocation.X = 0;
+                    potentialLocation.Y += NODE_VERTICAL_SPACING;
+                }
+                else if(noCollision)
                 {
                     findingSpace = false;
                 } else
                 {
-                    if(potentialLocation.X + NODE_WIDTH > Parent.Width)
-                    {
-                        potentialLocation.X = 0;
-                        potentialLocation.Y += NODE_VERTICAL_SPACING;
-                    } else
-                    {
-                        potentialLocation.X += NODE_HORIZONTAL_SPACING/2;
-                    }
+                    potentialLocation.X += NODE_HORIZONTAL_SPACING/2;
                 }
             }
             Location = potentialLocation;
