@@ -76,8 +76,6 @@ namespace HTNMaker
 
         public void Load(Stream stream)
         {
-            //TODO figure out what exceptions need to be handled
-
             ModelDAO dao = ModelDAO.Load(stream);
 
             List<Action> loadedActions = new List<Action>();
@@ -85,12 +83,12 @@ namespace HTNMaker
             List<Action> loadedTopActions = new List<Action>();
 
 
-            // TODO create variables from DAO
+            // create variables from DAO
             foreach(VariableDTO varDTO in dao.Variables)
             {
                 loadedVariables.Add(new Variable(varDTO));
             }
-            // TODO create actions from DAO, using named variables 
+            // create actions from DAO, using named variables 
             foreach(ActionDTO actDTO in dao.Actions)
             {
                 Action action = new Action(actDTO.Name, actDTO.Description, actDTO.IsPrimitive);

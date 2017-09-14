@@ -10,14 +10,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
-//TODO add checkboxes to make an action primitive/root, disabled if those are invalid choices
-//TODO figure out read-only databinding
-// TODO get grid to use variable names
-
 namespace HTNMaker
 {
     public partial class HTNEditorForm : Form
     {
+        const int NEW_NODE_X = 200;
+        const int NEW_NODE_Y = 50;
+
         public Model model { get; set; }
         public HTNEditorForm()
         {
@@ -255,7 +254,16 @@ namespace HTNMaker
                     // Remove selected action from list
                     actionBindingSource.RemoveCurrent();
                     model.TopLevelActions.Remove(selectedAction);
-                    //TODO check for any nodecontrols with removed action
+                    // get any NodeControls with deleted action
+                    List<NodeControl> nodes = new List<NodeControl>();
+                    nodes.AddRange(graphPanel.Controls.OfType<NodeControl>().Where(n => n.ObservedAction == selectedAction));
+                    foreach(NodeControl node in nodes)
+                    {
+                        // Close and remove nodes
+                        node.closeChildren();
+                        graphPanel.Controls.Remove(node);
+                    }
+
                 }
             }
         }
@@ -377,9 +385,9 @@ namespace HTNMaker
                     childForm.ShowDialog();
                     if (childForm.DialogResult == DialogResult.OK)
                     {
-                        //TODO handle errors
+                        childActionBindingSource.DataSource = null;
                         selectedAction.addChild(childForm.ChosenAction);
-                        childList.Refresh();
+                        childActionBindingSource.DataSource = (actionBindingSource.Current as Action).Children;
                     }
                 }
             } else
@@ -516,9 +524,11 @@ namespace HTNMaker
 
         private void actionListBox_MouseDown(object sender, MouseEventArgs e)
         {
-            //HACK figure out how to allow selection by clicking but also drag and drop
-            if((Keys.Control & Control.ModifierKeys) != 0)
+            int index = actionListBox.IndexFromPoint(e.X, e.Y);
+            if(index >=0)
             {
+                actionListBox.SelectedIndex = index;
+                actionBindingSource.Position = index;
                 DoDragDrop((actionBindingSource.Current as Action).Name, DragDropEffects.Copy);
             }
             
@@ -554,22 +564,16 @@ namespace HTNMaker
                     placeNewNode(selectedAction, graphPanel.PointToClient(new Point(e.X, e.Y)), false);
                 }
             }
-            //TODO create nodecontrol for a dropped action
-            //Action a = e.Data.GetData(typeof(Action)) as Action;
-            //if(a != null)
-            //{
-            //    NodeControl node = new NodeControl(a);
-            //    Controls.Add(node);
-            //    Point clientPoint = this.PointToClient(new Point(e.X, e.Y));
-            //    node.Location = clientPoint;
-            //}
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            if (actionBindingSource.Current != null)
+            if (elementTabControl.SelectedTab == actionTab && actionBindingSource.Current != null)
             {
-                placeNewNode(actionBindingSource.Current as Action, new Point(200,50));
+                placeNewNode(actionBindingSource.Current as Action, new Point(NEW_NODE_X, NEW_NODE_Y));
+            } else if (elementTabControl.SelectedTab == rootActionsTab && rootActionBindingSource.Current != null)
+            {
+                placeNewNode(rootActionBindingSource.Current as Action, new Point(NEW_NODE_X, NEW_NODE_Y));
             }
         }
 
@@ -628,5 +632,17 @@ namespace HTNMaker
                 }
             }
         }
+
+        private void rootActionListBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            int index = rootActionListBox.IndexFromPoint(e.X, e.Y);
+            if (index >= 0)
+            {
+                rootActionListBox.SelectedIndex = index;
+                rootActionBindingSource.Position = index;
+                DoDragDrop((rootActionBindingSource.Current as Action).Name, DragDropEffects.Copy);
+            }
+        }
+
     }
 }

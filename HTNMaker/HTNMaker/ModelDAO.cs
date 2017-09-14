@@ -29,7 +29,6 @@ namespace HTNMaker
 
         public static ModelDAO Load(Stream stream)
         {
-            // TODO check filepath extension
             XmlSerializer serializer = new XmlSerializer(typeof(ModelDAO));
             ModelDAO dao;
             dao = serializer.Deserialize(stream) as ModelDAO;

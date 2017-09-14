@@ -13,6 +13,7 @@ namespace HTNMaker
 {
     //TODO add condition and effect panels, hidden unless dragging variable over
     // On dropping into appropriate panel, variable is added to list of conditions/effects
+    //TODO on dragging action in, add as child if legal
     public partial class NodeControl : UserControl
     {
         public static int NODE_WIDTH = 150;
@@ -46,12 +47,6 @@ namespace HTNMaker
             titleLabel.DataBindings.Add(new Binding("Text", ObservedAction, "Name"));
         }
 
-        private void NodeControl_Paint(object sender, PaintEventArgs e)
-        {
-            //TODO get rid of this delegate
-           
-        }
-
         public void PaintConnections(Graphics g, Pen p)
         {
             Point bottomCenter = new Point(Location.X + Width / 2, Location.Y + Height);
@@ -69,7 +64,7 @@ namespace HTNMaker
             open = !open;
             if (open)
             {
-                //TODO unsubscribe, then subscribe, here
+                // Unsubscribe first, to ensure it's not added twice
                 (ObservedAction.Children as INotifyCollectionChanged).CollectionChanged -= ActionChildrenChanged;
                 (ObservedAction.Children as INotifyCollectionChanged).CollectionChanged += ActionChildrenChanged;
 
@@ -111,7 +106,6 @@ namespace HTNMaker
                 this.Top += (e.Y - mouseDownLocation.Y);
                 this.Left += (e.X - mouseDownLocation.X);
                 // Force redraw of connections
-                // HACK might be wrong?
                 Parent.Invalidate();
             }
         }
@@ -122,7 +116,7 @@ namespace HTNMaker
             closeChildren();
         }
 
-        private void closeChildren()
+        public void closeChildren()
         {
             (ObservedAction.Children as INotifyCollectionChanged).CollectionChanged -= ActionChildrenChanged;
             foreach (NodeControl child in childNodes)
@@ -174,29 +168,37 @@ namespace HTNMaker
         {
             //TODO were children added or removed? If removed, close child, and remove it from parent and own child list
             // If added, create new node and add to list/parent
-            switch (e.Action)
+            if (open)
             {
-                case NotifyCollectionChangedAction.Add:
-                    foreach(Action addedAction in e.NewItems)
-                    {
-                        NodeControl childNode = new NodeControl(addedAction, this);
-                        Parent.Controls.Add(childNode);
-                        childNodes.Add(childNode);
-                        childNode.Location = new Point(Location.X, Location.Y + NODE_VERTICAL_SPACING);
-                        childNode.findOpenSpace();
-                    }
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    //TODO get all nodes observing removed actions
-                    //TODO close each node, remove from parent, remove from children
-
-                    //List<Action> removedActions = e.OldItems;
-                    //removedActions.AddRange(e.OldItems.);
-                    //List<NodeControl> removedNodes = new List<NodeControl>();
-                    //removedNodes.AddRange(childNodes.Where(n => ))
-                    break;
-                default:
-                    break;
+                switch (e.Action)
+                {
+                    case NotifyCollectionChangedAction.Add:
+                        foreach (Action addedAction in e.NewItems)
+                        {
+                            NodeControl childNode = new NodeControl(addedAction, this);
+                            Parent.Controls.Add(childNode);
+                            childNodes.Add(childNode);
+                            childNode.Location = new Point(Location.X, Location.Y + NODE_VERTICAL_SPACING);
+                            childNode.findOpenSpace();
+                        }
+                        break;
+                    case NotifyCollectionChangedAction.Remove:
+                        // Get nodes observing removed action
+                        List<Action> removedActions = new List<Action>();
+                        removedActions.AddRange(e.OldItems.OfType<Action>());
+                        List<NodeControl> removedNodes = new List<NodeControl>();
+                        removedNodes.AddRange(childNodes.Where(n => removedActions.Any(a => a == n.ObservedAction)));
+                        foreach(NodeControl removedChild in removedNodes)
+                        {
+                            // Close and remove nodes
+                            removedChild.closeChildren();
+                            removedChild.Parent.Controls.Remove(removedChild);
+                            childNodes.Remove(removedChild);
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }

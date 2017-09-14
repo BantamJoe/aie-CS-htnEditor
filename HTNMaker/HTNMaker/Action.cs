@@ -89,6 +89,7 @@ namespace HTNMaker
             {
                 if (descendantsDirty)
                 {
+                    descendants.Clear();
                     foreach (Action child in children)
                     {
                         descendants.Add(child);
@@ -114,7 +115,6 @@ namespace HTNMaker
             descendants = new HashSet<Action>();
         }
 
-        // TODO addChild: check if valid to add, not creating a loop, not already in children
         // TODO enumerate error codes?
         public int addChild(Action action)
         {
@@ -154,7 +154,6 @@ namespace HTNMaker
             }
         }
 
-        // TODO addCondition/effect, if already in list just change value
         public void addCondition(Variable variable, bool value)
         {
             int index = conditions.FindIndex((Statement s) => { return s.Variable == variable; });
