@@ -127,18 +127,18 @@ namespace HTNMaker
                     if(child != null)
                     {
                         // try to add child, exception on relevant error code
-                        int resultCode = action.addChild(child);
+                        Action.AddChildErrorCode resultCode = action.addChild(child);
                         switch (resultCode)
                         {
-                            case 0:
+                            case Action.AddChildErrorCode.Success:
                                 break;
-                            case 1:
+                            case Action.AddChildErrorCode.PrimitiveParent:
                                 throw new InvalidDataException("Child action \"" + childName + "\" cannot be added to  \"" + action.Name + "\": \"" + action.Name + "\" is primitive");
                                 break;
-                            case 2:
+                            case Action.AddChildErrorCode.AlreadyIsChild:
                                 // Action added twice, no need to throw exception
                                 break;
-                            case 3:
+                            case Action.AddChildErrorCode.CircularRelationship:
                                 throw new InvalidDataException("Child action \"" + childName + "\" cannot be added to  \"" + action.Name + "\": Cycle detected");
                                 break;
                             default:

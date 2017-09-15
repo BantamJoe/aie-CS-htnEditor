@@ -9,6 +9,13 @@ namespace HTNMaker
 {
     public class Action
     {
+        public enum AddChildErrorCode
+        {
+            Success,
+            PrimitiveParent,
+            AlreadyIsChild,
+            CircularRelationship
+        }
 
         private string name;
         public string Name {
@@ -116,24 +123,24 @@ namespace HTNMaker
         }
 
         // TODO enumerate error codes?
-        public int addChild(Action action)
+        public AddChildErrorCode addChild(Action action)
         {
             if (primitive)
             {
-                return 1; // 1 for primitive actions have no children
+                return AddChildErrorCode.PrimitiveParent; 
             }
             else if (children.Contains(action))
             {
-                return 2; // 2 for child already exists
+                return AddChildErrorCode.AlreadyIsChild; 
             } else if (action == this || action.Descendants.Contains(this))
             {
-                return 3; // 3 for possible loop
+                return AddChildErrorCode.CircularRelationship; 
             } else
             {
                 children.Add(action);
                 action.parents.Add(this);
                 flagDirtyDescendants();
-                return 0;
+                return AddChildErrorCode.Success;
             }
 
         }
