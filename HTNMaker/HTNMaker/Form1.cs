@@ -108,6 +108,11 @@ namespace HTNMaker
                 errorMsg = "Action must have unique name";
                 return false;
             }
+            else if (name.Length == 0)
+            {
+                errorMsg = "Action name cannot be empty";
+                return false;
+            }
             errorMsg = "";
             return true;
         }
@@ -130,6 +135,10 @@ namespace HTNMaker
             if (!IsUniqueVariableName(name, renamedVariable))
             {
                 errorMsg = "Variable must have unique name";
+                return false;
+            } else if (name.Length == 0)
+            {
+                errorMsg = "Variable name cannot be empty";
                 return false;
             }
             errorMsg = "";
@@ -483,19 +492,16 @@ namespace HTNMaker
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //TODO prompt if not saved
             makeBlankHTN();
         }
 
         private void newToolStripButton_Click(object sender, EventArgs e)
         {
-            //TODO prompt if not saved
             makeBlankHTN();
         }
 
         private void openToolStripButton_Click(object sender, EventArgs e)
         {
-            //TODO prompt if not saved
             load();
         }
 

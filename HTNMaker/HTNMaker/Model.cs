@@ -142,7 +142,6 @@ namespace HTNMaker
                                 throw new InvalidDataException("Child action \"" + childName + "\" cannot be added to  \"" + action.Name + "\": Cycle detected");
                                 break;
                             default:
-                                //TODO throw exception
                                 break;
                         }
                     }
@@ -153,7 +152,7 @@ namespace HTNMaker
                 }
                 
             }
-                // TODO set top level actions (possible exception: name not found)
+                // set top level actions
             foreach(string actionName in dao.TopLevelActions)
             {
                 Action action = loadedActions.Find(a => { return a.Name == actionName; });

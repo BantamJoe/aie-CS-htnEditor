@@ -163,8 +163,6 @@ namespace HTNMaker
 
         void ActionChildrenChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            //TODO were children added or removed? If removed, close child, and remove it from parent and own child list
-            // If added, create new node and add to list/parent
             if (open)
             {
                 switch (e.Action)
